@@ -61,7 +61,7 @@ function HeaderEffect() {
       list = [];
       for (let x = ws; x < ws + ow; x += SPACING) {
         for (let y = hs; y < hs + oh; y += SPACING) {
-          let p: Particle = {
+          const p: Particle = {
             vx: 0,
             vy: 0,
             x,
@@ -104,7 +104,7 @@ function HeaderEffect() {
         }
       }
 
-      let b = (a = ctx.createImageData(w, h)).data;
+      const b = (a = ctx.createImageData(w, h)).data;
       for (let i = 0; i < list.length; i++) {
         p = list[i];
         if (!p.show) continue;
