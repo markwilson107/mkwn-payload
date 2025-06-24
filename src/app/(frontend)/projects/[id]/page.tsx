@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 
 type Props = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export default async function ProjectPage({ params }: Props) {
