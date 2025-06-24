@@ -20,9 +20,7 @@ export default async function HomePage() {
     payload.findGlobal({ slug: 'information' }),
     payload.find({ collection: 'projects' }),
     payload.find({ collection: 'experience' }),
-  ])
-
-  if (!information) return null
+  ]);
 
   return (
     <main className="flex flex-col w-full gap-4 lg:flex-row min-h-dvh max-w-7xl mx-auto px-6 md:px-12 lg:px-24 max-lg:overflow-x-hidden">

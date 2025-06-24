@@ -126,17 +126,13 @@ function HeaderEffect() {
   }
 
   useEffect(() => {
-    restartParticles()
     themeRef.current = theme
+    restartParticles();
   }, [theme])
 
   useEffect(() => {
     if (canvasRef.current) {
       ctx = canvasRef.current.getContext('2d')
-
-      //   canvasRef.current.addEventListener("mouseleave", handleMouseExit);
-      //   canvasRef.current.addEventListener("touchstart", handleTouchStart);
-      //   canvasRef.current.addEventListener("touchend", handleMouseExit);
     }
   }, [containerRef.current, canvasRef.current])
 
@@ -150,7 +146,8 @@ function HeaderEffect() {
       window.removeEventListener('resize', restartParticles)
       window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [restartParticles, handleMouseMove])
+  }, []);
+
   return (
     <div style={{ width: 280, height: 280 }} ref={containerRef}>
       <canvas
