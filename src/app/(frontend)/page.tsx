@@ -22,18 +22,20 @@ export default async function HomePage() {
     payload.find({ collection: 'experience' }),
   ])
 
+  if (!information) return null
+
   return (
     <main className="flex flex-col w-full gap-4 lg:flex-row min-h-dvh max-w-7xl mx-auto px-6 md:px-12 lg:px-24 max-lg:overflow-x-hidden">
       <header className="flex flex-col justify-between lg:sticky top-0 py-12 lg:py-20 lg:h-screen lg:w-1/2">
         <div className="flex flex-col gap-4">
           <HeaderEffect />
-          <h1 className="text-[2.8rem] font-bold">{information.name}</h1>
-          <h2 className="text-[1.3rem] font-bold">{information.role}</h2>
-          <p className="text-base font-light max-w-[220px]">{information.slogan}</p>
+          <h1 className="text-[2.8rem] font-bold">{information?.name}</h1>
+          <h2 className="text-[1.3rem] font-bold">{information?.role}</h2>
+          <p className="text-base font-light max-w-[220px]">{information?.slogan}</p>
         </div>
         <div className="font-medium mt-10 text-lg">
           <a
-            href={getMediaUrl(information.resume)}
+            href={getMediaUrl(information?.resume)}
             target="_blank"
             className="group flex items-end text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
           >
@@ -51,7 +53,7 @@ export default async function HomePage() {
             </h2>
           </div>
           <div className="md:px-0">
-            <RichText data={information.description} />
+            <RichText data={information?.description} />
           </div>
         </section>
         <section className="relative mt-16 lg:mt-24 w-full">
@@ -60,7 +62,7 @@ export default async function HomePage() {
               Projects<span>——</span>
             </h2>
           </div>
-          {projects.docs.map((project, i) => (
+          {projects?.docs.map((project, i) => (
             <Link
               href={`/projects/${project.projectId}`}
               key={project.id}
@@ -105,7 +107,7 @@ export default async function HomePage() {
               Experience<span>——</span>
             </h2>
           </div>
-          {experience.docs.map((experience, i) => (
+          {experience?.docs.map((experience, i) => (
             <a
               key={experience.id}
               className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg hover:bg-item-background hover:border-item-border dark:hover:bg-item-background-dark dark:hover:border-item-border-dark"
@@ -130,7 +132,7 @@ export default async function HomePage() {
           ))}
         </section>
         <footer className="flex flex-col py-4 gap-6 lg:px-6 mt-20 lg:mt-24 text-sm w-full max-w-[600px] font-light leading-7">
-          <RichText data={information.footer} />
+          {information?.footer && <RichText data={information?.footer} />}
           <ThemeSwitch />
         </footer>
       </div>

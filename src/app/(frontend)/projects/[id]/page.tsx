@@ -5,6 +5,7 @@ import { getMediaUrl } from '@/utils/getMediaUrl'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
 
 type Props = {
@@ -26,6 +27,8 @@ export default async function ProjectPage({ params }: Props) {
   })
   const projectData = project.docs[0]
 
+  if (!projectData) redirect('/')
+
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
@@ -45,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
         >
           {projectData.banner.bannerImage && (
             <Image
-            priority
+              priority
               fill
               className="absolute object-cover"
               src={getMediaUrl(projectData.banner.bannerImage)}
