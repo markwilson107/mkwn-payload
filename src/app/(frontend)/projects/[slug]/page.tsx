@@ -56,6 +56,7 @@ export default async function ProjectPage({ params }: Props) {
               className="absolute object-cover"
               src={getMediaUrl(projectData.banner.bannerImage)}
               alt={getMediaAlt(projectData.banner.bannerImage, 'Banner Image')}
+              sizes="800px"
             />
           )}
           <div className="flex flex-col gap-2 justify-center items-center flex-2 p-6 pt-12 lg:pt-6 z-10">
@@ -65,7 +66,7 @@ export default async function ProjectPage({ params }: Props) {
                 width={200}
                 height={0}
                 alt={getMediaAlt(projectData.logo, 'Project Logo')}
-                sizes="200px"
+                sizes="400px"
               />
             )}
 
