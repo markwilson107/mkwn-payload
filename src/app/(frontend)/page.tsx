@@ -11,6 +11,7 @@ import Image from 'next/image'
 import { getMediaAlt } from '@/utils/getMediaAlt'
 import Socials from '@/collections/Socials'
 import ThemeSwitch from '@/components/ThemeSwitch'
+import ImageComp from '@/components/Image'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -66,14 +67,8 @@ export default async function HomePage() {
               key={project.id}
               className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg hover:bg-item-background hover:border-item-border dark:hover:bg-item-background-dark dark:hover:border-item-border-dark"
             >
-              <div className="relative w-36 h-24 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
-                <Image
-                  src={getMediaUrl(project.iconImage)}
-                  fill={true}
-                  style={{ objectFit: 'cover', objectPosition: 'top' }}
-                  alt={getMediaAlt(project.iconImage, 'Project Image')}
-                  sizes="150px"
-                />
+              <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
+                <ImageComp image={project.iconImage} className='w-full' allowFullscreen={false} />
               </div>
               <div className="flex flex-col md:ml-5 max-md:mt-4 z-10">
                 <div className="flex text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
