@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { colorPickerField } from '@innovixx/payload-color-picker-field'
+import { slugField } from '@/fields/slug'
+import { revalidateDelete, revalidateCollection } from './hooks/revalidateCollection'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -9,6 +11,13 @@ export const Projects: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  defaultPopulate: {
+    title: true,
+    slug: true,
+  },
+  admin: {
+    defaultColumns: ['title', 'slug', 'updatedAt'],
   },
   fields: [
     {
@@ -139,5 +148,10 @@ export const Projects: CollectionConfig = {
         },
       ],
     },
+    ...slugField(),
   ],
+  hooks: {
+    afterChange: [revalidateCollection("/projects")],
+    afterDelete: [revalidateDelete("/projects")],
+  },
 }

@@ -171,6 +171,8 @@ export interface ExperienceCollection {
   description: string;
   timeFrame: string;
   url?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -268,6 +270,8 @@ export interface ProjectCollection {
         id?: string | null;
       }[]
     | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -395,6 +399,8 @@ export interface ExperienceSelect<T extends boolean = true> {
   description?: T;
   timeFrame?: T;
   url?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -437,6 +443,8 @@ export interface ProjectsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -529,6 +537,8 @@ export interface InformationGlobal {
     phone: string;
     email: string;
   };
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -552,6 +562,8 @@ export interface InformationSelect<T extends boolean = true> {
         phone?: T;
         email?: T;
       };
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

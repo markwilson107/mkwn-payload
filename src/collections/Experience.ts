@@ -1,4 +1,6 @@
 import type { CollectionConfig } from 'payload'
+import { slugField } from '@/fields/slug'
+import { revalidateDelete, revalidateCollection } from './hooks/revalidateCollection'
 
 export const Experience: CollectionConfig = {
   slug: 'experience',
@@ -7,6 +9,9 @@ export const Experience: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  admin: {
+    defaultColumns: ['title', 'slug', 'updatedAt'],
   },
   fields: [
     {
@@ -24,7 +29,7 @@ export const Experience: CollectionConfig = {
       type: 'text',
       required: true,
     },
-        {
+    {
       name: 'timeFrame',
       type: 'text',
       required: true,
@@ -33,5 +38,10 @@ export const Experience: CollectionConfig = {
       name: 'url',
       type: 'text',
     },
+    ...slugField(),
   ],
+  hooks: {
+    afterChange: [revalidateCollection("/experience")],
+    afterDelete: [revalidateDelete("/experience")],
+  },
 }

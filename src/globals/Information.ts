@@ -1,4 +1,6 @@
 import { GlobalConfig } from 'payload'
+import { slugField } from '@/fields/slug'
+import { revalidateGlobal } from './hooks/revalidateGlobal'
 
 export const Information: GlobalConfig = {
   slug: 'information',
@@ -72,5 +74,9 @@ export const Information: GlobalConfig = {
         },
       ],
     },
+    ...slugField(),
   ],
+    hooks: {
+      afterChange: [revalidateGlobal("information")],
+    },
 }

@@ -7,25 +7,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
+import { MdArrowOutward } from 'react-icons/md'
 
 type Props = {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }
 
 export default async function ProjectPage({ params }: Props) {
-  const { id } = await params
+  const { slug } = await params
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
   const project = await payload.find({
     collection: 'projects',
+    limit: 1,
+    pagination: false,
     where: {
-      projectId: {
-        equals: id,
+      slug: {
+        equals: slug,
       },
     },
   })
-  const projectData = project.docs[0]
+  const projectData = project.docs?.[0] || null
 
   if (!projectData) redirect('/')
 
@@ -69,6 +72,15 @@ export default async function ProjectPage({ params }: Props) {
             <h2 className="font-bold text-5xl">{projectData.title}</h2>
             <h3 className="font-bold text-2xl">{projectData.subTitle}</h3>
             <p className="text-lg">{projectData.description}</p>
+            {projectData.url && (
+              <Link className="flex items-center group" href={projectData.url || ''}>
+                Link
+                <MdArrowOutward
+                  size={15}
+                  className="ml-1.5 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </Link>
+            )}
           </div>
           <div className="flex flex-3 justify-center items-center p-6 pb-12 md:p-12 lg:p-18 z-10">
             <ImageComp
