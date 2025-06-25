@@ -11,14 +11,13 @@ export default function ThemeSwitch() {
   useEffect(() =>  setMounted(true), [])
 
   if (!mounted) return;
-  console.log("resolvedTheme", resolvedTheme)
 
   if (resolvedTheme === 'dark') {
-    return <FiSun className="text-lg cursor-pointer hover:text-theme" onClick={() => setTheme('light')} />
+    return <FiSun className="text-lg cursor-pointer hover:text-theme select-none" onClick={() => setTheme('light')} />
   }
 
   if (resolvedTheme === 'light') {
-    return <FiMoon className="text-lg cursor-pointer hover:text-theme" onClick={() => setTheme('dark')} />
+    return <FiMoon className="text-lg cursor-pointer hover:text-theme select-none" onClick={() => setTheme('dark')} />
   }
 
 }
