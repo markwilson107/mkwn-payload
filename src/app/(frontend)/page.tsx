@@ -71,11 +71,11 @@ export default async function HomePage() {
                 <ImageComp image={project.iconImage} className='w-full' allowFullscreen={false} />
               </div>
               <div className="flex flex-col md:ml-5 max-md:mt-4 z-10">
-                <div className="flex text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
+                <div className=" text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
                   {project.title}
                   {project.subTitle ? ` — ${project.subTitle}` : ''}
                   <MdArrowOutward
-                    className="ml-2 mb-1 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                    className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
                     style={{ fontSize: '1rem' }}
                   />
                 </div>
@@ -111,10 +111,10 @@ export default async function HomePage() {
                 {experience.timeFrame}
               </div>
               <div className="flex flex-col md:ml-5 mt-1.5">
-                <div className="flex text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
+                <div className="text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
                   {experience.title}
                   <MdArrowOutward
-                    className="ml-2 mb-1 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                    className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
                     style={{ fontSize: '1rem' }}
                   />
                 </div>
