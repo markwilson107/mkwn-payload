@@ -25,11 +25,11 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-col w-full gap-4 lg:flex-row min-h-dvh max-w-7xl mx-auto px-6 md:px-12 lg:px-24 max-lg:overflow-x-hidden">
-      <header className="flex flex-col justify-between lg:sticky top-0 py-12 lg:py-20 lg:h-screen lg:w-1/2">
-        <div className="flex flex-col gap-4">
+      <header className="flex flex-col justify-between lg:sticky top-0 py-6 sm:py-12 lg:py-20 lg:h-screen lg:w-1/2">
+        <div className="flex flex-col gap-3 sm:gap-4">
           <HeaderEffect />
-          <h1 className="text-[2.8rem] font-bold">{information?.name}</h1>
-          <h2 className="text-[1.3rem] font-bold">{information?.role}</h2>
+          <h1 className="text-[2.4rem] sm:text-[2.8rem] font-bold">{information?.name}</h1>
+          <h2 className="text-[1rem] sm:text-[1.3rem] font-bold">{information?.role}</h2>
           <p className="text-base font-light max-w-[220px]">{information?.slogan}</p>
         </div>
         <div className="font-medium mt-10 text-lg">
@@ -55,7 +55,7 @@ export default async function HomePage() {
             <RichText data={information?.description} />
           </div>
         </section>
-        <section className="relative mt-16 lg:mt-24 w-full">
+        <section className="relative mt-12 lg:mt-24 w-full">
           <div className="hidden max-lg:block mb-5">
             <h2 className="font-medium text-xl">
               Projects<span>——</span>
@@ -65,7 +65,7 @@ export default async function HomePage() {
             <Link
               href={`/projects/${project.projectId}`}
               key={project.id}
-              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg hover:bg-item-background hover:border-item-border dark:hover:bg-item-background-dark dark:hover:border-item-border-dark"
+              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
             >
               <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
                 <ImageComp image={project.iconImage} className='w-full' allowFullscreen={false} />
@@ -94,7 +94,7 @@ export default async function HomePage() {
             </Link>
           ))}
         </section>
-        <section className="relative w-full mt-16 lg:mt-24">
+        <section className="relative w-full mt-12 lg:mt-24">
           <div className="hidden max-lg:block mb-5">
             <h2 className="font-medium text-xl">
               Experience<span>——</span>
@@ -103,7 +103,7 @@ export default async function HomePage() {
           {experience?.docs.map((experience, i) => (
             <a
               key={experience.id}
-              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg hover:bg-item-background hover:border-item-border dark:hover:bg-item-background-dark dark:hover:border-item-border-dark"
+              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
               href={experience.url || ''}
               target="_blank"
             >
@@ -124,7 +124,7 @@ export default async function HomePage() {
             </a>
           ))}
         </section>
-        <footer className="flex flex-col py-4 gap-6 lg:px-6 mt-20 lg:mt-24 text-sm w-full max-w-[600px] font-light leading-7">
+        <footer className="flex flex-col py-4 sm:py-0 gap-6 lg:px-6 mb-6 sm:mb-0 mt-12 sm:mt-20 text-sm w-full max-w-[600px] font-light leading-7">
           {information?.footer && <RichText data={information?.footer} />}
           <ThemeSwitch />
         </footer>

@@ -149,7 +149,7 @@ function HeaderEffect() {
   }, []);
 
   return (
-    <div style={{ width: 280, height: 280 }} ref={containerRef}>
+    <div className='w-[280px] h-[280px]' ref={containerRef}>
       <canvas
         className="pointer-events-none z-0"
         style={{ transform: 'translate(-25%,-25%)' }}
