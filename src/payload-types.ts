@@ -166,6 +166,7 @@ export interface MediaCollection {
  */
 export interface ExperienceCollection {
   id: string;
+  _order?: string | null;
   title: string;
   role: string;
   description: string;
@@ -394,6 +395,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "experience_select".
  */
 export interface ExperienceSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   role?: T;
   description?: T;
