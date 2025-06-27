@@ -1,14 +1,16 @@
 import type { GlobalAfterChangeHook } from 'payload'
 
-import { revalidateTag } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 export const revalidateGlobal =
-  (global: string): GlobalAfterChangeHook =>({ doc, req: { payload, context } }) => {
-  if (!context.disableRevalidate) {
-    payload.logger.info(`Revalidating header`)
+  (global: string): GlobalAfterChangeHook =>
+  ({ doc, req: { payload, context } }) => {
+    if (!context.disableRevalidate) {
+      payload.logger.info(`Revalidating header`)
 
-    revalidateTag(`global_${global}`)
+      revalidatePath('/')
+      revalidateTag(`global_${global}`)
+    }
+
+    return doc
   }
-
-  return doc
-}
