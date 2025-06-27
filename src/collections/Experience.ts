@@ -4,6 +4,7 @@ import { revalidateDelete, revalidateCollection } from './hooks/revalidateCollec
 
 export const Experience: CollectionConfig = {
   slug: 'experience',
+  orderable: true,
   typescript: {
     interface: 'ExperienceCollection',
   },
