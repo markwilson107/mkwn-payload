@@ -15,6 +15,7 @@ export const revalidateCollection =
       payload.logger.info(`Revalidating post at path: ${path}`)
 
       revalidatePath(path)
+      revalidatePath("/")
       revalidateTag('projects-sitemap')
     }
 
