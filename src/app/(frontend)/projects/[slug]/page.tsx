@@ -70,8 +70,12 @@ export default async function ProjectPage({ params }: Props) {
               />
             )}
 
-            <h2 className="font-bold text-5xl">{projectData.title}</h2>
-            <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
+            {!projectData.logo && (
+              <>
+                <h2 className="font-bold text-5xl">{projectData.title}</h2>
+                <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
+              </>
+            )}
             <p className="text-base mt-3">{projectData.description}</p>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
@@ -119,14 +123,16 @@ export default async function ProjectPage({ params }: Props) {
               )}
               <div
                 key={image.id}
-                className={`flex justify-center items-center w-full flex-col md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
+                className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
               >
                 {image.description && (
-                  <div className="flex-2">
-                    <p className="text-xl text-center sm:text-2xl font-bold py-6 md:px-6">{image.description}</p>
+                  <div className="flex-1">
+                    <p className="text-base text-center font-bold py-6 md:px-6">
+                      {image.description}
+                    </p>
                   </div>
                 )}
-                <ImageComp image={image.image} className="w-full flex-3" allowFullscreen={true} />
+                <ImageComp image={image.image} className="w-full flex-1" allowFullscreen={true} />
               </div>
             </div>
           ))}
