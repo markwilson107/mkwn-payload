@@ -56,10 +56,10 @@ export default async function ProjectPage({ params }: Props) {
               className="absolute object-cover"
               src={getMediaUrl(projectData.banner.bannerImage)}
               alt={getMediaAlt(projectData.banner.bannerImage, 'Banner Image')}
-              sizes="800px"
+              sizes="1000px"
             />
           )}
-          <div className="flex flex-col gap-2 justify-center items-center flex-2 p-6 pt-12 lg:pt-6 z-10">
+          <div className="flex flex-col gap-3 justify-center items-center flex-2 p-6 sm:p-12 pt-12 lg:pt-6 z-10">
             {projectData.logo && (
               <Image
                 src={getMediaUrl(projectData.logo)}
@@ -71,8 +71,8 @@ export default async function ProjectPage({ params }: Props) {
             )}
 
             <h2 className="font-bold text-5xl">{projectData.title}</h2>
-            <h3 className="font-bold text-2xl">{projectData.subTitle}</h3>
-            <p className="text-lg">{projectData.description}</p>
+            <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
+            <p className="text-base mt-3">{projectData.description}</p>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
@@ -88,6 +88,7 @@ export default async function ProjectPage({ params }: Props) {
               image={projectData.featuredImage}
               className="w-full"
               allowFullscreen={true}
+              showLoading={false}
             />
           </div>
         </section>
@@ -108,24 +109,24 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        <section className="flex flex-col gap-12 md:gap-24 my-6 md:my-12 px-6 md:px-12">
+        <section className="flex flex-col gap-8 md:gap-24 my-6 md:my-12 px-6 md:px-12">
           {projectData.images?.map((image, i) => (
-            <div key={image.id} className={`flex justify-center flex-col`}>
+            <div key={image.id} className={`flex justify-center items-center flex-col`}>
               {image.title && (
-                <h2 className="flex items-center font-bold text-2xl sm:text-3xl mb-6 md:mb-12">
+                <h2 className="flex items-center text-center font-bold text-2xl sm:text-3xl mb-6 md:mb-12">
                   {image.title}
                 </h2>
               )}
               <div
                 key={image.id}
-                className={`flex justify-center items-center flex-row w-full ${i !== 0 && projectData.images![i - 1].description ? 'flex-row-reverse' : ''}`}
+                className={`flex justify-center items-center w-full flex-col md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
               >
                 {image.description && (
                   <div className="flex-2">
-                    <p className="text-2xl sm:text-3xl font-bold ">{image.description}</p>
+                    <p className="text-xl text-center sm:text-2xl font-bold py-6 md:px-6">{image.description}</p>
                   </div>
                 )}
-                <ImageComp image={image.image} className="w-full" allowFullscreen={true} />
+                <ImageComp image={image.image} className="w-full flex-3" allowFullscreen={true} />
               </div>
             </div>
           ))}

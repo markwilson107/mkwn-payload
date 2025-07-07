@@ -30,7 +30,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
             fill
             className="w-full h-auto z-10"
             alt={getMediaAlt(image, 'Image')}
-            sizes="800px"
+            sizes="12000px"
           />
         </Zoom>
       ) : (
@@ -42,7 +42,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
           fill
           className="w-full h-auto z-10"
           alt={getMediaAlt(image, 'Image')}
-          sizes="800px"
+          sizes="1200px"
         />
       )}
       {showLoading && loading && (
