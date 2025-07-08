@@ -103,7 +103,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </section>
         {projectData.challenge && projectData.goal && (
-          <section className="flex flex-col md:flex-row w-full">
+          <section className="flex flex-col w-full">
             <div className="flex flex-col gap-5 flex-1 px-6 md:px-12 my-6 md:my-12">
               <h2 className="flex font-bold text-2xl sm:text-3xl">Challenge</h2>
               <div className="text-base sm:text-lg">
@@ -149,7 +149,7 @@ export default async function ProjectPage({ params }: Props) {
           <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-6 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
             <div
-              className={`grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6 w-full`}
+              className={`grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
             >
               {projectData.technology.map((tech, i) => (
                 <div
@@ -165,7 +165,7 @@ export default async function ProjectPage({ params }: Props) {
                           showLoading={false}
                         />
                       </div>
-                      <p className="text-sm sm:text-base font-bold text-center">
+                      <p className="text-sm sm:text-base text-center">
                         {tech.technology.title}
                       </p>
                     </>
