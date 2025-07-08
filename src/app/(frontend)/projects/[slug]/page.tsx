@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: Props) {
                           showLoading={false}
                         />
                       </div>
-                      <p className="text-sm sm:text-base text-center">
+                      <p className="text-sm sm:text-base text-center opacity-0 group-hover:opacity-1 transition-opacity">
                         {tech.technology.title}
                       </p>
                     </>
