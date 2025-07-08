@@ -61,13 +61,20 @@ export default async function ProjectPage({ params }: Props) {
           )}
           <div className="flex flex-col gap-3 justify-center items-center flex-2 p-6 sm:p-12 pt-12 lg:pt-6 z-10">
             {projectData.logo && (
-              <Image
-                src={getMediaUrl(projectData.logo)}
-                width={200}
-                height={0}
-                alt={getMediaAlt(projectData.logo, 'Project Logo')}
-                sizes="400px"
+              <ImageComp
+                image={projectData.logo}
+                className="w-[200px]"
+                allowFullscreen={false}
+                showLoading={false}
+                sizes="200px"
               />
+              // <Image
+              //   src={getMediaUrl(projectData.logo)}
+              //   width={200}
+              //   height={0}
+              //   alt={getMediaAlt(projectData.logo, 'Project Logo')}
+              //   sizes="400px"
+              // />
             )}
 
             {!projectData.logo && (
@@ -76,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
                 <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
               </>
             )}
-            <p className="text-base mt-3">{projectData.description}</p>
+            <p className="text-base mt-3 max-w-[600px]">{projectData.description}</p>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
@@ -93,6 +100,7 @@ export default async function ProjectPage({ params }: Props) {
               className="w-full"
               allowFullscreen={true}
               showLoading={false}
+              sizes='1200px'
             />
           </div>
         </section>
@@ -113,26 +121,28 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        <section className="flex flex-col gap-8 md:gap-24 my-6 md:my-12 px-6 md:px-12">
+        <section className="flex flex-col gap-12 md:gap-24 my-6 md:my-12 px-6 md:px-12">
           {projectData.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
-              {image.title && (
-                <h2 className="flex items-center text-center font-bold text-2xl sm:text-3xl mb-6 md:mb-12">
-                  {image.title}
-                </h2>
-              )}
-              <div
-                key={image.id}
-                className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
-              >
+              <div className="flex flex-col items-center mb-6 md:mb-12">
+                {image.title && (
+                  <h2 className="flex items-center text-center font-bold text-2xl sm:text-3xl">
+                    {image.title}
+                  </h2>
+                )}
                 {image.description && (
-                  <div className="flex-1">
-                    <p className="text-base text-center font-bold py-6 md:px-6">
+                  <div className="flex-1  max-w-[600px]">
+                    <p className="text-base md:text-xl text-center pt-3 md:px-6">
                       {image.description}
                     </p>
                   </div>
                 )}
-                <ImageComp image={image.image} className="w-full flex-1" allowFullscreen={true} />
+              </div>
+              <div
+                key={image.id}
+                className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
+              >
+                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1" allowFullscreen={true} />
               </div>
             </div>
           ))}

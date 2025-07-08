@@ -14,9 +14,10 @@ type Props = {
   className?: string
   showLoading?: boolean
   allowFullscreen?: boolean
+  sizes?: string
 }
 
-function ImageComp({ image, className = '', showLoading = true, allowFullscreen = false }: Props) {
+function ImageComp({ image, className = '', showLoading = true, allowFullscreen = false, sizes = "1200px" }: Props) {
   const [loading, setLoading] = useState(true)
   return (
     <div className={`relative ${className}`} style={{ aspectRatio: getMediaAspect(image) }}>
@@ -30,7 +31,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
             fill
             className="w-full h-auto z-10"
             alt={getMediaAlt(image, 'Image')}
-            sizes="12000px"
+            sizes={sizes}
           />
         </Zoom>
       ) : (
@@ -42,7 +43,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
           fill
           className="w-full h-auto z-10"
           alt={getMediaAlt(image, 'Image')}
-          sizes="1200px"
+          sizes={sizes}
         />
       )}
       {showLoading && loading && (

@@ -115,20 +115,7 @@ export const Projects: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: true,
-    },
-    {
-      name: 'technology',
-      type: 'array',
-      fields: [
-        {
-          name: 'technology',
-          type: 'relationship',
-          relationTo: 'technology',
-          required: true,
-        },
-      ],
-    },
-    {
+    },    {
       name: 'images',
       type: 'array',
       fields: [
@@ -148,6 +135,19 @@ export const Projects: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'technology',
+      type: 'array',
+      fields: [
+        {
+          name: 'technology',
+          type: 'relationship',
+          relationTo: 'technology',
+          required: true,
+        },
+      ],
+    },
+
     ...slugField(),
   ],
   hooks: {

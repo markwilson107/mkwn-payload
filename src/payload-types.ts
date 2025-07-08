@@ -257,17 +257,17 @@ export interface ProjectCollection {
   };
   iconImage: string | MediaCollection;
   featuredImage: string | MediaCollection;
-  technology?:
-    | {
-        technology: string | TechnologyCollection;
-        id?: string | null;
-      }[]
-    | null;
   images?:
     | {
         title?: string | null;
         description?: string | null;
         image: string | MediaCollection;
+        id?: string | null;
+      }[]
+    | null;
+  technology?:
+    | {
+        technology: string | TechnologyCollection;
         id?: string | null;
       }[]
     | null;
@@ -431,18 +431,18 @@ export interface ProjectsSelect<T extends boolean = true> {
       };
   iconImage?: T;
   featuredImage?: T;
-  technology?:
-    | T
-    | {
-        technology?: T;
-        id?: T;
-      };
   images?:
     | T
     | {
         title?: T;
         description?: T;
         image?: T;
+        id?: T;
+      };
+  technology?:
+    | T
+    | {
+        technology?: T;
         id?: T;
       };
   slug?: T;
