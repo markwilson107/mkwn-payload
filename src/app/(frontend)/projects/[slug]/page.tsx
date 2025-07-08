@@ -81,7 +81,7 @@ export default async function ProjectPage({ params }: Props) {
                 <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
               </>
             )}
-            <p className="text-base mt-3 max-w-[600px]">{projectData.description}</p>
+            <p className="text-base mt-3 max-w-[500px]">{projectData.description}</p>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
