@@ -43,9 +43,7 @@ export default async function ProjectPage({ params }: Props) {
         <section
           className="relative flex flex-col lg:flex-row w-full text-center mb-6 md:mb-12"
           style={{
-            background: !projectData.banner.bannerImage
-              ? projectData.banner?.backgroundColor || 'unset'
-              : 'unset',
+            background: projectData.banner?.backgroundColor || 'unset',
             color: projectData.banner?.textColor || 'unset',
           }}
         >
