@@ -82,6 +82,8 @@ export default async function ProjectPage({ params }: Props) {
               </>
             )}
             <p className="text-base mt-3 max-w-[350px]">{projectData.description}</p>
+            <div className='flex flex-row flex-wrap justify-center gap-3 max-w-[350px] mt-2'>
+            {projectData.technology?.map((tech, i) => (<div key={`tech-bubble-${tech.id}`} className='text-xs px-3 py-1 rounded-full' style={{background: projectData.banner?.textColor || ""}}> <div className='mix-blend-difference'>{typeof tech.technology !== 'string' && (tech.technology.title)}</div></div>))}</div>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
