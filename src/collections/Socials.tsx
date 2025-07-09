@@ -1,6 +1,9 @@
 import { InformationGlobal } from "@/payload-types";
-import { FaEnvelope, FaGithub, FaLinkedin, FaPhone } from "react-icons/fa";
-import { MdCalendarMonth } from "react-icons/md";
+import GitHubIcon from "@/assets/GitHubIcon";
+import LinkedInIcon from "@/assets/LinkedInIcon";
+import CalandarIcon from "@/assets/CalandarIcon";
+import PhoneIcon from "@/assets/PhoneIcon";
+import EnvelopeIcon from "@/assets/EnvelopeIcon";
 
 function Socials({ information}: { information?: InformationGlobal }) {
     return <div className="flex items-center gap-6 mt-5 text-3xl max-w-xs">
@@ -9,33 +12,33 @@ function Socials({ information}: { information?: InformationGlobal }) {
               target="_blank"
               className="text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
             >
-              <FaGithub className="text-[25px]" />
+              <GitHubIcon width={25} height={25} />
             </a>
             <a
               href={information?.socials?.linkedin || ""}
               target="_blank"
               className="text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
             >
-              <FaLinkedin className="text-[25px]" />
+              <LinkedInIcon width={25} height={25} />
             </a>
             <a
               href={information?.socials?.calandly || ""}
               target="_blank"
               className="text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
             >
-              <MdCalendarMonth className="text-[28px]" />
+              <CalandarIcon width={28} height={28} />
             </a>
             <a
               href={`tel:${information?.socials?.phone || ""}`}
               className="text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
             >
-              <FaPhone className="text-[22px]" />
+              <PhoneIcon width={22} height={22} />
             </a>
             <a
               href={`mailto:${information?.socials?.email || ""}`}
               className="text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
             >
-              <FaEnvelope className="text-[25px]" />
+              <EnvelopeIcon width={25} height={25} className="text-[25px]" />
             </a>
           </div>;
 }

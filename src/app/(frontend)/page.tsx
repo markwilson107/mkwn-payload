@@ -4,7 +4,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import config from '@/payload.config'
 import './styles.css'
 import HeaderEffect from '@/components/HeaderEffect'
-import { MdArrowOutward } from 'react-icons/md'
+import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { getMediaUrl } from '@/utils/getMediaUrl'
 import Link from 'next/link'
 import Socials from '@/collections/Socials'
@@ -19,7 +19,7 @@ export default async function HomePage() {
     payload.findGlobal({ slug: 'information' }),
     payload.find({ collection: 'projects' }),
     payload.find({ collection: 'experience' }),
-  ]);
+  ])
 
   return (
     <main className="flex flex-col w-full gap-4 lg:flex-row min-h-dvh max-w-7xl mx-auto px-6 md:px-12 lg:px-24 max-lg:overflow-x-hidden">
@@ -37,7 +37,11 @@ export default async function HomePage() {
             className="group flex items-end text-primary dark:text-primary-dark hover:text-theme transition-colors duration-300"
           >
             Resume
-            <MdArrowOutward className="ml-1.5 mb-1 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowOutwardIcon
+              width={15}
+              height={15}
+              className="ml-1.5 mb-1 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
           </a>
           <Socials information={information} />
         </div>
@@ -66,15 +70,16 @@ export default async function HomePage() {
               className="relative group flex max-md:flex-col items-start max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
             >
               <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
-                <ImageComp image={project.iconImage} className='w-full' allowFullscreen={false} />
+                <ImageComp image={project.iconImage} className="w-full" allowFullscreen={false} />
               </div>
               <div className="flex flex-col md:ml-5 max-md:mt-4 z-10">
                 <div className=" text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
                   {project.title}
                   {project.subTitle ? ` — ${project.subTitle}` : ''}
-                  <MdArrowOutward
+                  <ArrowOutwardIcon
+                    width={17}
+                    height={17}
                     className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-                    style={{ fontSize: '1rem' }}
                   />
                 </div>
                 <div className="text-sm font-light my-1.5  leading-6">{project.description}</div>
@@ -111,9 +116,10 @@ export default async function HomePage() {
               <div className="flex flex-col md:ml-5 mt-1.5">
                 <div className="text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
                   {experience.title}
-                  <MdArrowOutward
+                  <ArrowOutwardIcon
+                  width={17}
+                  height={17}
                     className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-                    style={{ fontSize: '1rem' }}
                   />
                 </div>
                 <div className="text-sm my-1.5 opacity-60">{experience.role}</div>

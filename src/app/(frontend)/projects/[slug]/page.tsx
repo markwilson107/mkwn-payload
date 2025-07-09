@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
-import { MdArrowOutward } from 'react-icons/md'
+import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -87,8 +87,9 @@ export default async function ProjectPage({ params }: Props) {
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
-                <MdArrowOutward
-                  size={15}
+                <ArrowOutwardIcon
+                  width={15}
+                  height={15}
                   className="ml-1.5 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                 />
               </Link>
