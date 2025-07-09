@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
-        <header className="flex items-center w-full py-4 sm:py-6 px-6 sm:px-12 flex-shrink-0">
+        <header className="flex items-center w-full py-4 sm:py-6 px-3 sm:px-12 flex-shrink-0">
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: Props) {
             <ImageComp
               image={projectData.featuredImage}
               className="w-full"
-              allowFullscreen={true}
+              allowFullscreen={false}
               showLoading={false}
               sizes='1200px'
             />
@@ -107,27 +107,27 @@ export default async function ProjectPage({ params }: Props) {
         </section>
         {projectData.challenge && projectData.goal && (
           <section className="flex flex-col w-full">
-            <div className="flex flex-col gap-5 flex-1 px-6 md:px-12 my-6 md:my-12">
-              <h2 className="flex font-bold text-2xl sm:text-3xl">Challenge</h2>
+            <div className="flex flex-col gap-5 flex-1 px-3 md:px-12 my-6 md:my-12">
+              <h2 className="flex font-bold text-xl sm:text-3xl">Challenge</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.challenge} />
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 flex-1 px-6 md:px-12 my-6 md:my-12">
-              <h2 className="flex font-bold text-2xl sm:text-3xl">Goal</h2>
+            <div className="flex flex-col gap-5 flex-1 px-3 md:px-12 my-6 md:my-12">
+              <h2 className="flex font-bold text-xl sm:text-3xl">Goal</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.goal} />
               </div>
             </div>
           </section>
         )}
-        <section className="flex flex-col gap-12 md:gap-24 my-6 md:my-12 px-6 md:px-12">
+        <section className="flex flex-col gap-12 md:gap-24 my-6 md:my-12 px-3 md:px-12">
           {projectData.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
               <div className="flex flex-col items-center mb-6 md:mb-12">
                 {image.title && (
-                  <h2 className="flex items-center text-center font-bold text-2xl sm:text-3xl">
+                  <h2 className="flex items-center text-center font-bold text-xl sm:text-3xl">
                     {image.title}
                   </h2>
                 )}
@@ -143,13 +143,13 @@ export default async function ProjectPage({ params }: Props) {
                 key={image.id}
                 className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
               >
-                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1 shadow-md md:shadow-2xl" allowFullscreen={true} />
+                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1 shadow-lg md:shadow-2xl" allowFullscreen={true} />
               </div>
             </div>
           ))}
         </section>
         {projectData.technology && (
-          <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-6 md:px-12`}>
+          <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-3 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
             <div
               className={`grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
