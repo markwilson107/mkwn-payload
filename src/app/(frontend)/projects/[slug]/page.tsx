@@ -142,7 +142,7 @@ export default async function ProjectPage({ params }: Props) {
                 key={image.id}
                 className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
               >
-                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1 shadow-2xl" allowFullscreen={true} />
+                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1 shadow-md md:shadow-2xl" allowFullscreen={true} />
               </div>
             </div>
           ))}
