@@ -137,20 +137,22 @@ export default async function ProjectPage({ params }: Props) {
         <section className="flex flex-col gap-6 sm:gap-12 md:gap-24 my-6 md:my-12 px-4 md:px-12">
           {projectData.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
-              <div className="flex flex-col items-center mb-6 md:mb-12">
-                {image.title && (
-                  <h2 className="flex items-center text-center font-bold text-xl sm:text-3xl">
-                    {image.title}
-                  </h2>
-                )}
-                {image.description && (
-                  <div className="flex-1  max-w-[600px]">
-                    <p className="text-base md:text-xl text-center pt-3 md:px-4">
-                      {image.description}
-                    </p>
-                  </div>
-                )}
-              </div>
+              {(image.title || image.description) && (
+                <div className="flex flex-col items-center mb-6 md:mb-12">
+                  {image.title && (
+                    <h2 className="flex items-center text-center font-bold text-xl sm:text-3xl">
+                      {image.title}
+                    </h2>
+                  )}
+                  {image.description && (
+                    <div className="flex-1  max-w-[600px]">
+                      <p className="text-base md:text-xl text-center pt-3 md:px-4">
+                        {image.description}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
               <div
                 key={image.id}
                 className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
@@ -168,9 +170,7 @@ export default async function ProjectPage({ params }: Props) {
         {projectData.technology && (
           <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-4 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
-            <div
-              className={`grid grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
-            >
+            <div className={`grid grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}>
               {projectData.technology.map((tech, i) => (
                 <div
                   key={tech.id}
