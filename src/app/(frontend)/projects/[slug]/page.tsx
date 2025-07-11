@@ -138,7 +138,7 @@ export default async function ProjectPage({ params }: Props) {
           {projectData.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
               {(image.title || image.description) && (
-                <div className="flex flex-col items-center mb-6 md:mb-12">
+                <div className="flex flex-col items-center mt-6 mb-6 md:mb-12">
                   {image.title && (
                     <h2 className="flex items-center text-center font-bold text-xl sm:text-3xl">
                       {image.title}
