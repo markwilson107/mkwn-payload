@@ -82,8 +82,20 @@ export default async function ProjectPage({ params }: Props) {
               </>
             )}
             <p className="text-base mt-3 max-w-[350px]">{projectData.description}</p>
-            <div className='flex flex-row flex-wrap justify-center gap-2 max-w-[350px] mt-2'>
-            {projectData.technology?.map((tech, i) => (<div key={`tech-bubble-${tech.id}`} className='text-xs px-3 py-1 rounded-full' style={{background: projectData.banner?.textColor || ""}}> <div className='mix-blend-difference'>{typeof tech.technology !== 'string' && (tech.technology.title)}</div></div>))}</div>
+            <div className="flex flex-row flex-wrap justify-center gap-2 max-w-[350px] mt-2">
+              {projectData.technology?.map((tech, i) => (
+                <div
+                  key={`tech-bubble-${tech.id}`}
+                  className="text-xs px-3 py-1 rounded-full"
+                  style={{ background: projectData.banner?.textColor || '' }}
+                >
+                  {' '}
+                  <div className="mix-blend-difference">
+                    {typeof tech.technology !== 'string' && tech.technology.title}
+                  </div>
+                </div>
+              ))}
+            </div>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
                 Link
@@ -101,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
               className="w-full"
               allowFullscreen={false}
               showLoading={false}
-              sizes='1200px'
+              sizes="1200px"
             />
           </div>
         </section>
@@ -143,7 +155,12 @@ export default async function ProjectPage({ params }: Props) {
                 key={image.id}
                 className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
               >
-                <ImageComp sizes='1200px' image={image.image} className="w-full flex-1 shadow-lg md:shadow-2xl" allowFullscreen={true} />
+                <ImageComp
+                  sizes="1200px"
+                  image={image.image}
+                  className="w-full flex-1 shadow-lg md:shadow-2xl"
+                  allowFullscreen={true}
+                />
               </div>
             </div>
           ))}
@@ -152,7 +169,7 @@ export default async function ProjectPage({ params }: Props) {
           <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-4 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
             <div
-              className={`grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
+              className={`grid grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
             >
               {projectData.technology.map((tech, i) => (
                 <div
@@ -178,7 +195,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        {projectData.conclusion && projectData.reference && (
+        {(projectData.conclusion || projectData.reference) && (
           <section
             className="flex flex-col md:flex-row w-full my-6 md:my-12"
             style={{
@@ -186,19 +203,23 @@ export default async function ProjectPage({ params }: Props) {
               color: projectData.banner?.textColor || 'unset',
             }}
           >
-            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
-              <h2 className="flex font-bold text-2xl sm:text-3xl">Conclusion</h2>
-              <div className="text-base sm:text-lg">
-                <RichText data={projectData.conclusion} />
+            {projectData.conclusion && (
+              <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
+                <h2 className="flex font-bold text-2xl sm:text-3xl">Conclusion</h2>
+                <div className="text-base sm:text-lg">
+                  <RichText data={projectData.conclusion} />
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
-              <h2 className="flex font-bold text-2xl sm:text-3xl">Reference</h2>
-              <div className="text-base sm:text-lg">
-                <RichText data={projectData.reference} />
+            {projectData.reference && (
+              <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
+                <h2 className="flex font-bold text-2xl sm:text-3xl">Reference</h2>
+                <div className="text-base sm:text-lg">
+                  <RichText data={projectData.reference} />
+                </div>
               </div>
-            </div>
+            )}
           </section>
         )}
         <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
