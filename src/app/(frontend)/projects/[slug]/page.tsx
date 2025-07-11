@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
-        <header className="flex items-center w-full py-4 sm:py-6 px-3 sm:px-12 flex-shrink-0">
+        <header className="flex items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: Props) {
               </>
             )}
             <p className="text-base mt-3 max-w-[350px]">{projectData.description}</p>
-            <div className='flex flex-row flex-wrap justify-center gap-3 max-w-[350px] mt-2'>
+            <div className='flex flex-row flex-wrap justify-center gap-2 max-w-[350px] mt-2'>
             {projectData.technology?.map((tech, i) => (<div key={`tech-bubble-${tech.id}`} className='text-xs px-3 py-1 rounded-full' style={{background: projectData.banner?.textColor || ""}}> <div className='mix-blend-difference'>{typeof tech.technology !== 'string' && (tech.technology.title)}</div></div>))}</div>
             {projectData.url && (
               <Link className="flex items-center group" href={projectData.url || ''}>
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: Props) {
               </Link>
             )}
           </div>
-          <div className="flex flex-3 justify-center items-center p-6 pb-12 md:p-12 lg:p-18 z-10">
+          <div className="flex flex-3 justify-center items-center p-4 pb-12 md:p-12 lg:p-18 z-10">
             <ImageComp
               image={projectData.featuredImage}
               className="w-full"
@@ -107,14 +107,14 @@ export default async function ProjectPage({ params }: Props) {
         </section>
         {projectData.challenge && projectData.goal && (
           <section className="flex flex-col w-full">
-            <div className="flex flex-col gap-5 flex-1 px-3 md:px-12 my-6 md:my-12">
+            <div className="flex flex-col gap-5 flex-1 px-4 md:px-12 my-6 md:my-12">
               <h2 className="flex font-bold text-xl sm:text-3xl">Challenge</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.challenge} />
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 flex-1 px-3 md:px-12 my-6 md:my-12">
+            <div className="flex flex-col gap-5 flex-1 px-4 md:px-12 my-6 md:my-12">
               <h2 className="flex font-bold text-xl sm:text-3xl">Goal</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.goal} />
@@ -122,7 +122,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        <section className="flex flex-col gap-12 md:gap-24 my-6 md:my-12 px-3 md:px-12">
+        <section className="flex flex-col gap-6 sm:gap-12 md:gap-24 my-6 md:my-12 px-4 md:px-12">
           {projectData.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
               <div className="flex flex-col items-center mb-6 md:mb-12">
@@ -133,7 +133,7 @@ export default async function ProjectPage({ params }: Props) {
                 )}
                 {image.description && (
                   <div className="flex-1  max-w-[600px]">
-                    <p className="text-base md:text-xl text-center pt-3 md:px-6">
+                    <p className="text-base md:text-xl text-center pt-3 md:px-4">
                       {image.description}
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export default async function ProjectPage({ params }: Props) {
           ))}
         </section>
         {projectData.technology && (
-          <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-3 md:px-12`}>
+          <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-4 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
             <div
               className={`grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}
@@ -186,14 +186,14 @@ export default async function ProjectPage({ params }: Props) {
               color: projectData.banner?.textColor || 'unset',
             }}
           >
-            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-6 md:px-12">
+            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
               <h2 className="flex font-bold text-2xl sm:text-3xl">Conclusion</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.conclusion} />
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-6 md:px-12">
+            <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
               <h2 className="flex font-bold text-2xl sm:text-3xl">Reference</h2>
               <div className="text-base sm:text-lg">
                 <RichText data={projectData.reference} />
@@ -201,7 +201,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-6 sm:px-12 flex-shrink-0">
+        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
           <div></div>
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">© mkwn.dev</h1>
