@@ -10,7 +10,7 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
 type Props = {
-  image: MediaCollection | number
+  image: MediaCollection | number | string
   className?: string
   showLoading?: boolean
   allowFullscreen?: boolean
