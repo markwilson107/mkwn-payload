@@ -50,17 +50,48 @@ export default async function HomePage() {
         <section className="relative w-full">
           <div className="hidden max-lg:block mb-7">
             <h2 className="font-medium text-xl">
-              About<span>——</span>
+              About
             </h2>
           </div>
           <div className="md:px-0">
             <RichText data={information?.description} />
           </div>
         </section>
+          <section className="relative w-full mt-12 lg:mt-24">
+          <div className="hidden max-lg:block mb-5">
+            <h2 className="font-medium text-xl">
+              Experience
+            </h2>
+          </div>
+          {experience?.docs.map((experience, i) => (
+            <a
+              key={experience.id}
+              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
+              href={experience.url || ''}
+              target="_blank"
+            >
+              <div className="w-36 text-sm flex-shrink-0 mt-2 opacity-60">
+                {experience.timeFrame}
+              </div>
+              <div className="flex flex-col md:ml-5 mt-1.5">
+                <div className="text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
+                  {experience.title}
+                  <ArrowOutwardIcon
+                  width={17}
+                  height={17}
+                    className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                  />
+                </div>
+                <div className="text-sm my-1.5 opacity-60">{experience.role}</div>
+                <div className="text-sm font-light leading-6">{experience.description}</div>
+              </div>
+            </a>
+          ))}
+        </section>
         <section className="relative mt-12 lg:mt-24 w-full">
           <div className="hidden max-lg:block mb-5">
             <h2 className="font-medium text-xl">
-              Projects<span>——</span>
+              Projects
             </h2>
           </div>
           {projects?.docs.map((project, i) => (
@@ -97,38 +128,7 @@ export default async function HomePage() {
             </Link>
           ))}
         </section>
-        <section className="relative w-full mt-12 lg:mt-24">
-          <div className="hidden max-lg:block mb-5">
-            <h2 className="font-medium text-xl">
-              Experience<span>——</span>
-            </h2>
-          </div>
-          {experience?.docs.map((experience, i) => (
-            <a
-              key={experience.id}
-              className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
-              href={experience.url || ''}
-              target="_blank"
-            >
-              <div className="w-36 text-sm flex-shrink-0 mt-2 opacity-60">
-                {experience.timeFrame}
-              </div>
-              <div className="flex flex-col md:ml-5 mt-1.5">
-                <div className="text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
-                  {experience.title}
-                  <ArrowOutwardIcon
-                  width={17}
-                  height={17}
-                    className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-                  />
-                </div>
-                <div className="text-sm my-1.5 opacity-60">{experience.role}</div>
-                <div className="text-sm font-light leading-6">{experience.description}</div>
-              </div>
-            </a>
-          ))}
-        </section>
-        <footer className="flex flex-col py-4 sm:py-0 gap-6 lg:px-6 mb-6 sm:mb-0 mt-12 sm:mt-20 text-sm w-full max-w-[600px] font-light leading-7">
+        <footer className="flex flex-col py-4 sm:py-0 gap-6  mb-6 sm:mb-0 mt-12 sm:mt-20 text-sm w-full max-w-[600px] font-light leading-7">
           {information?.footer && <RichText data={information?.footer} />}
           <ThemeSwitch />
         </footer>
