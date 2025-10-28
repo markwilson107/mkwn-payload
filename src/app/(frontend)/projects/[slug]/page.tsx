@@ -32,6 +32,8 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!projectData) redirect('/')
 
+    projectData.description
+
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">

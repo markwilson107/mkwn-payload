@@ -40,7 +40,6 @@ export const Projects: CollectionConfig = {
       name: 'subTitle',
       type: 'text',
     },
-
     {
       name: 'description',
       type: 'text',
@@ -140,7 +139,7 @@ export const Projects: CollectionConfig = {
       type: 'array',
       fields: [
         {
-          name: 'technology',
+          name: 'technology_item',
           type: 'relationship',
           relationTo: 'technology',
           required: true,
