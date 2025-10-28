@@ -89,7 +89,7 @@ export default async function HomePage() {
                       key={`${tech.id}`}
                       className="relative px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full mr-2 mb-2 z-30"
                     >
-                      {typeof tech.technology !== 'string' && tech.technology.title}
+                      {typeof tech.technology_item !== 'number' && tech.technology_item.title}
                     </div>
                   ))}
                 </div>

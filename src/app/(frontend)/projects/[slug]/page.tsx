@@ -93,7 +93,7 @@ export default async function ProjectPage({ params }: Props) {
                 >
                   {' '}
                   <div className="mix-blend-difference">
-                    {typeof tech.technology !== 'string' && tech.technology.title}
+                    {typeof tech.technology_item !== 'number' && tech.technology_item.title}
                   </div>
                 </div>
               ))}
@@ -178,17 +178,17 @@ export default async function ProjectPage({ params }: Props) {
                   key={tech.id}
                   className="group flex flex-col gap-3 items-center justify-center flex-shrink-0 "
                 >
-                  {typeof tech.technology !== 'string' && (
+                  {typeof tech.technology_item !== 'number' && (
                     <>
                       <div className="flex items-center justify-center aspect-square w-full">
                         <ImageComp
-                          image={tech.technology.logo}
+                          image={tech.technology_item.logo}
                           className="w-full dark:invert opacity-80 hover:opacity-100"
                           showLoading={false}
                         />
                       </div>
                       <p className="text-sm sm:text-base text-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        {tech.technology.title}
+                        {tech.technology_item.title}
                       </p>
                     </>
                   )}

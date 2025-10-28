@@ -1,5 +1,5 @@
 import { MediaCollection } from '@/payload-types'
 
-export const getMediaAspect = (media: string | MediaCollection): string => {
-  return typeof media === 'string' ? '' : `${media.width}/${media.height}`
+export const getMediaAspect = (media: number | MediaCollection): string => {
+  return typeof media === 'number' ? '' : `${media.width}/${media.height}`
 }
