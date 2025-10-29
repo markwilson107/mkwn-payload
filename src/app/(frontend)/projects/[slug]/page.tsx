@@ -55,6 +55,7 @@ export default async function ProjectPage({ params }: Props) {
               src={getMediaUrl(projectData.banner.bannerImage)}
               alt={getMediaAlt(projectData.banner.bannerImage, 'Banner Image')}
               sizes="1000px"
+              unoptimized
             />
           )}
           <div className="flex flex-col gap-3 justify-center items-center flex-2 p-6 sm:p-12 pt-12 lg:pt-6 z-10">
