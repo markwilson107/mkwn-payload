@@ -11,7 +11,7 @@ import Socials from '@/collections/Socials'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import ImageComp from '@/components/Image'
 
-export const revalidate = 60 * 60 * 24 * 30
+export const revalidate = 2592000
 
 export default async function HomePage() {
   const payloadConfig = await config
