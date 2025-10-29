@@ -86,10 +86,8 @@ export default async function ProjectPage({ params }: Props) {
               {projectData.technology?.map((tech, i) => (
                 <div
                   key={`tech-bubble-${tech.id}`}
-                  className="text-xs px-3 py-1 rounded-full"
-                  style={{ background: projectData.banner?.textColor || '' }}
+                  className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
                 >
-                  {' '}
                   <div className="mix-blend-difference">
                     {typeof tech.technology_item !== 'number' && tech.technology_item.title}
                   </div>
