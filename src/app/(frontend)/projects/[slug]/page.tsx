@@ -13,14 +13,10 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
-export const revalidate = 2592000
+const queryProjectsBySlug = async ({ slug }: { slug: string }) => {
+  const payload = await getPayload({ config })
 
-export default async function ProjectPage({ params }: Props) {
-  const { slug } = await params
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const project = await payload.find({
+  const result = await payload.find({
     collection: 'projects',
     limit: 1,
     pagination: false,
@@ -30,9 +26,16 @@ export default async function ProjectPage({ params }: Props) {
       },
     },
   })
-  const projectData = project.docs?.[0] || null
 
-  if (!projectData) redirect('/')
+  return result.docs?.[0] || null
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const { slug } = await params
+
+  const product = await queryProjectsBySlug({ slug })
+
+  if (!product) redirect('/')
 
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
@@ -45,48 +48,48 @@ export default async function ProjectPage({ params }: Props) {
         <section
           className="relative flex flex-col lg:flex-row w-full text-center mb-6 md:mb-12"
           style={{
-            background: projectData.banner?.backgroundColor || 'unset',
-            color: projectData.banner?.textColor || 'unset',
+            background: product.banner?.backgroundColor || 'unset',
+            color: product.banner?.textColor || 'unset',
           }}
         >
-          {projectData.banner.bannerImage && (
+          {product.banner.bannerImage && (
             <Image
               priority
               fill
               className="absolute object-cover"
-              src={getMediaUrl(projectData.banner.bannerImage)}
-              alt={getMediaAlt(projectData.banner.bannerImage, 'Banner Image')}
+              src={getMediaUrl(product.banner.bannerImage)}
+              alt={getMediaAlt(product.banner.bannerImage, 'Banner Image')}
               sizes="1000px"
               unoptimized
             />
           )}
           <div className="flex flex-col gap-3 justify-center items-center flex-2 p-6 sm:p-12 pt-12 lg:pt-6 z-10">
-            {projectData.logo && (
+            {product.logo && (
               <ImageComp
-                image={projectData.logo}
+                image={product.logo}
                 className="w-[200px]"
                 allowFullscreen={false}
                 showLoading={false}
                 sizes="200px"
               />
               // <Image
-              //   src={getMediaUrl(projectData.logo)}
+              //   src={getMediaUrl(product.logo)}
               //   width={200}
               //   height={0}
-              //   alt={getMediaAlt(projectData.logo, 'Project Logo')}
+              //   alt={getMediaAlt(product.logo, 'Project Logo')}
               //   sizes="400px"
               // />
             )}
 
-            {!projectData.logo && (
+            {!product.logo && (
               <>
-                <h2 className="font-bold text-5xl">{projectData.title}</h2>
-                <h3 className="font-bold text-3xl">{projectData.subTitle}</h3>
+                <h2 className="font-bold text-5xl">{product.title}</h2>
+                <h3 className="font-bold text-3xl">{product.subTitle}</h3>
               </>
             )}
-            <p className="text-base mt-3 max-w-[350px]">{projectData.description}</p>
+            <p className="text-base mt-3 max-w-[350px]">{product.description}</p>
             <div className="flex flex-row flex-wrap justify-center gap-2 max-w-[350px] mt-2">
-              {projectData.technology?.map((tech, i) => (
+              {product.technology?.map((tech, i) => (
                 <div
                   key={`tech-bubble-${tech.id}`}
                   className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
@@ -97,8 +100,8 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
               ))}
             </div>
-            {projectData.url && (
-              <Link className="flex items-center group" href={projectData.url || ''}>
+            {product.url && (
+              <Link className="flex items-center group" href={product.url || ''}>
                 Link
                 <ArrowOutwardIcon
                   width={15}
@@ -110,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
           <div className="flex flex-3 justify-center items-center p-4 pb-12 md:p-12 lg:p-18 z-10">
             <ImageComp
-              image={projectData.featuredImage}
+              image={product.featuredImage}
               className="w-full"
               allowFullscreen={false}
               showLoading={false}
@@ -118,25 +121,25 @@ export default async function ProjectPage({ params }: Props) {
             />
           </div>
         </section>
-        {projectData.challenge && projectData.goal && (
+        {product.challenge && product.goal && (
           <section className="flex flex-col w-full">
             <div className="flex flex-col gap-5 flex-1 px-4 md:px-12 my-6 md:my-12">
               <h2 className="flex font-bold text-xl sm:text-3xl">Challenge</h2>
               <div className="text-base sm:text-lg">
-                <RichText data={projectData.challenge} />
+                <RichText data={product.challenge} />
               </div>
             </div>
 
             <div className="flex flex-col gap-5 flex-1 px-4 md:px-12 my-6 md:my-12">
               <h2 className="flex font-bold text-xl sm:text-3xl">Goal</h2>
               <div className="text-base sm:text-lg">
-                <RichText data={projectData.goal} />
+                <RichText data={product.goal} />
               </div>
             </div>
           </section>
         )}
         <section className="flex flex-col gap-6 sm:gap-12 md:gap-24 my-6 md:my-12 px-4 md:px-12">
-          {projectData.images?.map((image, i) => (
+          {product.images?.map((image, i) => (
             <div key={image.id} className={`flex justify-center items-center flex-col`}>
               {(image.title || image.description) && (
                 <div className="flex flex-col items-center mt-6 mb-6 md:mb-12">
@@ -168,11 +171,11 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           ))}
         </section>
-        {projectData.technology && (
+        {product.technology && (
           <section className={`flex flex-col my-6 md:my-12 md:mb-8 px-4 md:px-12`}>
             <h2 className="flex font-bold text-2xl sm:text-3xl mb-6 md:mb-12">{'Technology'}</h2>
             <div className={`grid grid-cols-4 lg:grid-cols-6 gap-6 md:gap-12 w-full`}>
-              {projectData.technology.map((tech, i) => (
+              {product.technology.map((tech, i) => (
                 <div
                   key={tech.id}
                   className="group flex flex-col gap-3 items-center justify-center flex-shrink-0 "
@@ -196,28 +199,28 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         )}
-        {(projectData.conclusion || projectData.reference) && (
+        {(product.conclusion || product.reference) && (
           <section
             className="flex flex-col md:flex-row w-full my-6 md:my-12"
             style={{
-              background: projectData.banner?.backgroundColor || 'unset',
-              color: projectData.banner?.textColor || 'unset',
+              background: product.banner?.backgroundColor || 'unset',
+              color: product.banner?.textColor || 'unset',
             }}
           >
-            {projectData.conclusion && (
+            {product.conclusion && (
               <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
                 <h2 className="flex font-bold text-2xl sm:text-3xl">Conclusion</h2>
                 <div className="text-base sm:text-lg">
-                  <RichText data={projectData.conclusion} />
+                  <RichText data={product.conclusion} />
                 </div>
               </div>
             )}
 
-            {projectData.reference && (
+            {product.reference && (
               <div className="flex flex-col gap-5 flex-1 py-12 md:py-24 px-4 md:px-12">
                 <h2 className="flex font-bold text-2xl sm:text-3xl">Reference</h2>
                 <div className="text-base sm:text-lg">
-                  <RichText data={projectData.reference} />
+                  <RichText data={product.reference} />
                 </div>
               </div>
             )}

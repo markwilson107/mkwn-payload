@@ -7,7 +7,7 @@ import HeaderEffect from '@/components/HeaderEffect'
 import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { getMediaUrl } from '@/utils/getMediaUrl'
 import Link from 'next/link'
-import Socials from '@/collections/Socials'
+import Socials from '@/components/Socials'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import ImageComp from '@/components/Image'
 
