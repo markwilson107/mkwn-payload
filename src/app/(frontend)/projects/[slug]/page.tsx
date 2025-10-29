@@ -13,6 +13,8 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+export const revalidate = 60 * 60 * 24 * 30
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params
   const payloadConfig = await config
