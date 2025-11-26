@@ -14,32 +14,42 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
-const queryProjectsBySlug = (slug: string) =>
+const queryCompanyBySlug = (slug: string) =>
 	unstable_cache(
 		async () => {
 			const payload = await getPayload({ config })
 
-			const result = await payload.find({
-				collection: 'projects',
-				limit: 1,
-				pagination: false,
-				where: { slug: { equals: slug } },
-			})
+			const [experience, projects] = await Promise.all([
+				payload.find({
+					collection: 'experience',
+					limit: 1,
+					pagination: false,
+					where: { slug: { equals: slug } },
+				}),
+				payload.find({
+					collection: 'projects',
+					pagination: false,
+					where: { experienceSlug: { equals: slug } },
+				}),
+			])
 
-			return result.docs?.[0] || null
+			return {
+				experience: experience.docs?.[0] || null,
+				projects: projects.docs,
+			}
 		},
-		[`project-${slug}`],
+		[`experience-${slug}`],
 		{
-			tags: [`project-${slug}`],
+			tags: [`experience-${slug}`],
 		}
 	)()
 
-export default async function ProjectPage({ params }: Props) {
+export default async function CompanyPage({ params }: Props) {
   const { slug } = await params
 
-  const product = await queryProjectsBySlug(slug)
+  const { experience, projects } = await queryCompanyBySlug(slug)
 
-  if (!product) redirect('/')
+  if (!experience) redirect('/')
 
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
@@ -49,7 +59,41 @@ export default async function ProjectPage({ params }: Props) {
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
         </header>
-        <section
+        <section className="w-full px-3">
+          <h1 className="flex justify-center text-4xl md:text-5xl font-bold">{experience.title}</h1>
+          <p className="w-full text-center flex gap-3 justify-center text-sm text-gray-400 mt-4 ">
+            <span>{experience.role}</span>
+            <span>{'•'}</span>
+            <span>{experience.timeFrame}</span>
+            {experience.url ? (
+              <>
+                <span>{'•'}</span>
+                <span>
+                  <a href={experience.url}>Link</a>
+                </span>
+              </>
+            ) : (
+              ''
+            )}
+          </p>
+          <div className="w-full flex justify-center mt-2">
+            <p className="text-sm text-gray-400 max-w-[400px] text-center">
+              {experience.description}
+            </p>
+          </div>
+          {projects?.map((project) => (
+            <div key={`project-${project.id}`} className="flex flex-row w-full">
+                            <ImageComp
+                image={project.banner?.bannerImage || ""}
+                className="w-full"
+                allowFullscreen={false}
+                showLoading={false}
+              />
+              {/* <img className='w-full' src={getMediaUrl(project.banner?.bannerImage || '')} /> */}
+            </div>
+          ))}
+        </section>
+        {/* <section
           className="relative flex flex-col lg:flex-row w-full text-center mb-6 md:mb-12"
           style={{
             background: product.banner?.backgroundColor || 'unset',
@@ -229,7 +273,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             )}
           </section>
-        )}
+        )} */}
         <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
           <div></div>
           <Link href="/">

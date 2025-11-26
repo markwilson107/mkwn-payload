@@ -8,7 +8,8 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
-  
+  upload: true,
+
   fields: [
     {
       name: 'alt',
@@ -21,6 +22,4 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
-  
 }

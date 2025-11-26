@@ -190,6 +190,8 @@ export interface ProjectCollection {
   subTitle?: string | null;
   description?: string | null;
   url?: string | null;
+  experience?: (number | null) | ExperienceCollection;
+  experienceSlug?: string | null;
   challenge?: {
     root: {
       type: string;
@@ -418,6 +420,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   subTitle?: T;
   description?: T;
   url?: T;
+  experience?: T;
+  experienceSlug?: T;
   challenge?: T;
   goal?: T;
   conclusion?: T;

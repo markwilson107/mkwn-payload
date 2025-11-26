@@ -12,7 +12,7 @@ export const Experience: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'updatedAt'], useAsTitle: 'title',
   },
   fields: [
     {
@@ -42,7 +42,7 @@ export const Experience: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateCollection("/experience")],
-    afterDelete: [revalidateDelete("/experience")],
+    afterChange: [revalidateCollection("experience")],
+    afterDelete: [revalidateDelete("experience")],
   },
 }

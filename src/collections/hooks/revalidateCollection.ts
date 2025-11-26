@@ -10,13 +10,13 @@ export const revalidateCollection =
   (basePath: string): CollectionAfterChangeHook<Collections> =>
   ({ doc, req: { payload, context } }) => {
     if (!context.disableRevalidate) {
-      const path = `${basePath}/${doc.slug}`
+      const path = `${basePath}-${doc.slug}`
 
       payload.logger.info(`Revalidating post at path: ${path}`)
 
       revalidatePath(path)
-      revalidatePath("/")
-      revalidateTag('projects-sitemap')
+      revalidatePath('/')
+      revalidateTag(`${basePath}-sitemap`)
     }
 
     return doc
@@ -26,10 +26,11 @@ export const revalidateDelete =
   (basePath: string): CollectionAfterDeleteHook<Collections> =>
   ({ doc, req: { context } }) => {
     if (!context.disableRevalidate) {
-      const path = `${basePath}/${doc?.slug}`
+      const path = `${basePath}-${doc?.slug}`
 
       revalidatePath(path)
-      revalidateTag('projects-sitemap')
+      revalidatePath('/')
+      revalidateTag(`${basePath}-sitemap`)
     }
 
     return doc

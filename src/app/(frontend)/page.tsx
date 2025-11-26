@@ -11,7 +11,6 @@ import Socials from '@/components/Socials'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import ImageComp from '@/components/Image'
 
-export const revalidate = 2592000
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -50,7 +49,7 @@ export default async function HomePage() {
       </header>
       <div className="flex flex-col w-full lg:w-1/2 lg:py-20 leading-7">
         <section className="relative w-full">
-          <div className="hidden max-lg:block mb-7">
+          <div className="lg:hidden mb-7">
             <h2 className="font-medium text-xl">
               About
             </h2>
@@ -60,17 +59,16 @@ export default async function HomePage() {
           </div>
         </section>
           <section className="relative w-full mt-12 lg:mt-24">
-          <div className="hidden max-lg:block mb-5">
+          <div className="block mb-5 lg:hidden">
             <h2 className="font-medium text-xl">
               Experience
             </h2>
           </div>
           {experience?.docs.map((experience, i) => (
-            <a
+            <Link
               key={experience.id}
               className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
-              href={experience.url || ''}
-              target="_blank"
+              href={`/companies/${experience.slug}`}
             >
               <div className="w-36 text-sm flex-shrink-0 mt-2 opacity-60">
                 {experience.timeFrame}
@@ -87,11 +85,11 @@ export default async function HomePage() {
                 <div className="text-sm my-1.5 opacity-60">{experience.role}</div>
                 <div className="text-sm font-light leading-6">{experience.description}</div>
               </div>
-            </a>
+            </Link>
           ))}
         </section>
         <section className="relative mt-12 lg:mt-24 w-full">
-          <div className="hidden max-lg:block mb-5">
+          <div className="block mb-5 lg:hidden">
             <h2 className="font-medium text-xl">
               Projects
             </h2>

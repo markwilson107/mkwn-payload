@@ -49,6 +49,16 @@ export const Projects: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'experience',
+      type: 'relationship',
+      relationTo: 'experience',
+    },
+    {
+      name: 'experienceSlug',
+      type: 'text',
+      virtual: 'experience.slug',
+    },
+    {
       name: 'challenge',
       type: 'richText',
     },
@@ -114,7 +124,8 @@ export const Projects: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: true,
-    },    {
+    },
+    {
       name: 'images',
       type: 'array',
       fields: [
@@ -150,7 +161,7 @@ export const Projects: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateCollection("/projects")],
-    afterDelete: [revalidateDelete("/projects")],
+    afterChange: [revalidateCollection('project')],
+    afterDelete: [revalidateDelete('project')],
   },
 }
