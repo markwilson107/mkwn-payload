@@ -15,34 +15,34 @@ type Props = {
 }
 
 const queryCompanyBySlug = (slug: string) =>
-	unstable_cache(
-		async () => {
-			const payload = await getPayload({ config })
+  unstable_cache(
+    async () => {
+      const payload = await getPayload({ config })
 
-			const [experience, projects] = await Promise.all([
-				payload.find({
-					collection: 'experience',
-					limit: 1,
-					pagination: false,
-					where: { slug: { equals: slug } },
-				}),
-				payload.find({
-					collection: 'projects',
-					pagination: false,
-					where: { experienceSlug: { equals: slug } },
-				}),
-			])
+      const [experience, projects] = await Promise.all([
+        payload.find({
+          collection: 'experience',
+          limit: 1,
+          pagination: false,
+          where: { slug: { equals: slug } },
+        }),
+        payload.find({
+          collection: 'projects',
+          pagination: false,
+          where: { experienceSlug: { equals: slug } },
+        }),
+      ])
 
-			return {
-				experience: experience.docs?.[0] || null,
-				projects: projects.docs,
-			}
-		},
-		[`experience-${slug}`],
-		{
-			tags: [`experience-${slug}`],
-		}
-	)()
+      return {
+        experience: experience.docs?.[0] || null,
+        projects: projects.docs,
+      }
+    },
+    [`experience-${slug}`],
+    {
+      tags: [`experience-${slug}`],
+    },
+  )()
 
 export default async function CompanyPage({ params }: Props) {
   const { slug } = await params
@@ -59,39 +59,47 @@ export default async function CompanyPage({ params }: Props) {
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
         </header>
-        <section className="w-full px-3">
-          <h1 className="flex justify-center text-4xl md:text-5xl font-bold">{experience.title}</h1>
-          <p className="w-full text-center flex gap-3 justify-center text-sm text-gray-400 mt-4 ">
+        <section className="w-full px-4 sm:px-12 py-3">
+          <h1 className="flex lg:justify-center text-4xl sm:text-5xl font-bold">
+            {experience.title}
+          </h1>
+          <p className="w-full lg:text-center flex flex-col lg:flex-row gap-1 lg:gap-3 lg:justify-center text-sm text-gray-400 mt-4 lg:mt-6 ">
             <span>{experience.role}</span>
-            <span>{'•'}</span>
+            <span className="max-lg:hidden">{'•'}</span>
             <span>{experience.timeFrame}</span>
             {experience.url ? (
               <>
-                <span>{'•'}</span>
+                <span className="max-lg:hidden">{'•'}</span>
                 <span>
-                  <a href={experience.url}>Link</a>
+                  <a href={experience.url} target="_blank">
+                    Link
+                  </a>
                 </span>
               </>
             ) : (
               ''
             )}
           </p>
-          <div className="w-full flex justify-center mt-2">
-            <p className="text-sm text-gray-400 max-w-[400px] text-center">
+          <div className="w-full flex lg:justify-center mt-2">
+            <p className="text-sm text-gray-400 max-w-[400px] lg:text-center">
               {experience.description}
             </p>
           </div>
+          <div className='flex flex-row items-center justify-center w-full mt-12'>
           {projects?.map((project) => (
-            <div key={`project-${project.id}`} className="flex flex-row w-full">
-                            <ImageComp
-                image={project.banner?.bannerImage || ""}
-                className="w-full"
+            <div key={`project-${project.id}`} className="w-[38rem]">
+              <div className='relative rounded-xl overflow-hidden w-full aspect-[1920/1080] flex p-8 text-white'>
+
+                        <ImageComp
+                image={project.banner?.bannerImage || ''}
+                className="!absolute top-0 right-0 w-full rounded-xl"
                 allowFullscreen={false}
                 showLoading={false}
-              />
+              /><div className='z-10 flex flex-row w-full'> <div className='flex flex-col gap-3 z-10 text-2xl font-bold'><div>{project.title}</div><div className='font-semibold text-base'>{project.description}</div></div>   </div>
+              </div>
               {/* <img className='w-full' src={getMediaUrl(project.banner?.bannerImage || '')} /> */}
             </div>
-          ))}
+          ))}</div>
         </section>
         {/* <section
           className="relative flex flex-col lg:flex-row w-full text-center mb-6 md:mb-12"

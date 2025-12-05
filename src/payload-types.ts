@@ -88,7 +88,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {
     information: InformationGlobal;
@@ -128,7 +128,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface UserCollection {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -145,7 +145,7 @@ export interface UserCollection {
  * via the `definition` "media".
  */
 export interface MediaCollection {
-  id: number;
+  id: string;
   alt: string;
   video: boolean;
   updatedAt: string;
@@ -165,7 +165,7 @@ export interface MediaCollection {
  * via the `definition` "experience".
  */
 export interface ExperienceCollection {
-  id: number;
+  id: string;
   _order?: string | null;
   title: string;
   role: string;
@@ -182,15 +182,15 @@ export interface ExperienceCollection {
  * via the `definition` "projects".
  */
 export interface ProjectCollection {
-  id: number;
+  id: string;
   _order?: string | null;
   projectId: string;
-  logo?: (number | null) | MediaCollection;
+  logo?: (string | null) | MediaCollection;
   title: string;
   subTitle?: string | null;
   description?: string | null;
   url?: string | null;
-  experience?: (number | null) | ExperienceCollection;
+  experience?: (string | null) | ExperienceCollection;
   experienceSlug?: string | null;
   challenge?: {
     root: {
@@ -253,23 +253,23 @@ export interface ProjectCollection {
     [k: string]: unknown;
   } | null;
   banner: {
-    bannerImage?: (number | null) | MediaCollection;
+    bannerImage?: (string | null) | MediaCollection;
     textColor?: string | null;
     backgroundColor?: string | null;
   };
-  iconImage: number | MediaCollection;
-  featuredImage: number | MediaCollection;
+  iconImage: string | MediaCollection;
+  featuredImage: string | MediaCollection;
   images?:
     | {
         title?: string | null;
         description?: string | null;
-        image: number | MediaCollection;
+        image: string | MediaCollection;
         id?: string | null;
       }[]
     | null;
   technology?:
     | {
-        technology_item: number | TechnologyCollection;
+        technology_item: string | TechnologyCollection;
         id?: string | null;
       }[]
     | null;
@@ -283,9 +283,9 @@ export interface ProjectCollection {
  * via the `definition` "technology".
  */
 export interface TechnologyCollection {
-  id: number;
+  id: string;
   title: string;
-  logo: number | MediaCollection;
+  logo: string | MediaCollection;
   updatedAt: string;
   createdAt: string;
 }
@@ -294,32 +294,32 @@ export interface TechnologyCollection {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | UserCollection;
+        value: string | UserCollection;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | MediaCollection;
+        value: string | MediaCollection;
       } | null)
     | ({
         relationTo: 'experience';
-        value: number | ExperienceCollection;
+        value: string | ExperienceCollection;
       } | null)
     | ({
         relationTo: 'projects';
-        value: number | ProjectCollection;
+        value: string | ProjectCollection;
       } | null)
     | ({
         relationTo: 'technology';
-        value: number | TechnologyCollection;
+        value: string | TechnologyCollection;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | UserCollection;
+    value: string | UserCollection;
   };
   updatedAt: string;
   createdAt: string;
@@ -329,10 +329,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | UserCollection;
+    value: string | UserCollection;
   };
   key?: string | null;
   value?:
@@ -352,7 +352,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -501,7 +501,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "information".
  */
 export interface InformationGlobal {
-  id: number;
+  id: string;
   name: string;
   role: string;
   slogan: string;
@@ -535,7 +535,7 @@ export interface InformationGlobal {
     };
     [k: string]: unknown;
   };
-  resume: number | MediaCollection;
+  resume: string | MediaCollection;
   socials: {
     github: string;
     linkedin: string;

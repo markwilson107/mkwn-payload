@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: Props) {
                   className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
                 >
                   <div className="mix-blend-difference">
-                    {typeof tech.technology_item !== 'number' && tech.technology_item.title}
+                    {typeof tech.technology_item !== 'string' && tech.technology_item.title}
                   </div>
                 </div>
               ))}
@@ -184,7 +184,7 @@ export default async function ProjectPage({ params }: Props) {
                   key={tech.id}
                   className="group flex flex-col gap-3 items-center justify-center flex-shrink-0 "
                 >
-                  {typeof tech.technology_item !== 'number' && (
+                  {typeof tech.technology_item !== 'string' && (
                     <>
                       <div className="flex items-center justify-center aspect-square w-full">
                         <ImageComp

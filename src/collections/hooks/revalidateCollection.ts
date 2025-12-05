@@ -14,7 +14,7 @@ export const revalidateCollection =
 
       payload.logger.info(`Revalidating post at path: ${path}`)
 
-      revalidatePath(path)
+      revalidateTag(path)
       revalidatePath('/')
       revalidateTag(`${basePath}-sitemap`)
     }
@@ -28,7 +28,7 @@ export const revalidateDelete =
     if (!context.disableRevalidate) {
       const path = `${basePath}-${doc?.slug}`
 
-      revalidatePath(path)
+      revalidateTag(path)
       revalidatePath('/')
       revalidateTag(`${basePath}-sitemap`)
     }
