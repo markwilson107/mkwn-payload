@@ -230,7 +230,7 @@ export default async function ProjectPage({ params }: Props) {
             )}
           </section>
         )}
-        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
+        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0 mt-auto">
           <div></div>
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">© mkwn.dev</h1>

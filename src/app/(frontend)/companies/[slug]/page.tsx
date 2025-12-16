@@ -85,21 +85,66 @@ export default async function CompanyPage({ params }: Props) {
               {experience.description}
             </p>
           </div>
-          <div className='flex flex-row items-center justify-center w-full mt-12'>
-          {projects?.map((project) => (
-            <div key={`project-${project.id}`} className="w-[38rem]">
-              <div className='relative rounded-xl overflow-hidden w-full aspect-[1920/1080] flex p-8 text-white'>
-
-                        <ImageComp
-                image={project.banner?.bannerImage || ''}
-                className="!absolute top-0 right-0 w-full rounded-xl"
-                allowFullscreen={false}
-                showLoading={false}
-              /><div className='z-10 flex flex-row w-full'> <div className='flex flex-col gap-3 z-10 text-2xl font-bold'><div>{project.title}</div><div className='font-semibold text-base'>{project.description}</div></div>   </div>
-              </div>
-              {/* <img className='w-full' src={getMediaUrl(project.banner?.bannerImage || '')} /> */}
-            </div>
-          ))}</div>
+          <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12">
+            {projects?.map((project) => (
+              <Link
+                href={`/projects/${project.projectId}`}
+                key={`project-${project.id}`}
+                className="flex flex-row w-full lg:w-[50rem] cursor-pointer select-none group"
+              >
+                <div
+                  className="relative rounded-xl overflow-hidden w-full flex p-4 sm:p-6 lg:p-8 sm:aspect-16/9"
+                  style={{
+                    background: project.banner?.backgroundColor || 'unset',
+                    color: project.banner?.textColor || 'unset',
+                  }}
+                >
+                  <ImageComp
+                    image={project.banner?.bannerImage || ''}
+                    className="!absolute left-0 top-0 w-full h-full overflow-hidden"
+                    imgClassName="object-cover"
+                    allowFullscreen={false}
+                    showLoading={false}
+                  />
+                  <div className="z-10 flex flex-col w-full">
+                    <div className="flex flex-col gap-3 z-10 text-2xl font-bold pb-4 max-w-[400px]">
+                      {project.logo ? (
+                        <div className="relative w-30 sm:w-44 flex-shrink-0 rounded-md overflow-hidden">
+                          <ImageComp
+                            image={project.logo || ''}
+                            className="w-full"
+                            allowFullscreen={false}
+                          />
+                        </div>
+                      ) : (
+                        <div>{project.title}</div>
+                      )}
+                      <div className="font-semibold text-sm sm:text-base opacity-90">
+                        {project.description}
+                      </div>
+                      <div className="flex flex-row flex-wrap gap-2 mt-2 sm:mt-4">
+                        {project.technology?.map((tech, i) => (
+                          <div
+                            key={`tech-bubble-${tech.id}`}
+                            className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
+                          >
+                            <div className="mix-blend-difference">
+                              {typeof tech.technology_item !== 'string' &&
+                                tech.technology_item.title}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex mt-2 sm:mt-auto ">
+                      <ArrowOutwardIcon className="ml-auto w-8 sm:w-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+                {/* <img className='w-full' src={getMediaUrl(project.banner?.bannerImage || '')} /> */}
+              </Link>
+            ))}
+          </div>
         </section>
         {/* <section
           className="relative flex flex-col lg:flex-row w-full text-center mb-6 md:mb-12"
@@ -282,7 +327,7 @@ export default async function CompanyPage({ params }: Props) {
             )}
           </section>
         )} */}
-        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
+        <footer className="flex justify-between items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0 mt-auto">
           <div></div>
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">© mkwn.dev</h1>

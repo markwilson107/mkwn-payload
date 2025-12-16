@@ -14,6 +14,10 @@ export const revalidateCollection =
 
       payload.logger.info(`Revalidating post at path: ${tag}`)
 
+      if ('experienceSlug' in doc) {
+        revalidateTag(`experience-${doc.experienceSlug}`)
+      }
+
       revalidateTag(tag)
       revalidatePath('/')
       revalidateTag(`${basePath}-sitemap`)
@@ -27,6 +31,10 @@ export const revalidateDelete =
   ({ doc, req: { context } }) => {
     if (!context.disableRevalidate) {
       const tag = `${basePath}-${doc?.slug}`
+
+      if ('experienceSlug' in doc) {
+        revalidateTag(`experience-${doc.experienceSlug}`)
+      }
 
       revalidateTag(tag)
       revalidatePath('/')

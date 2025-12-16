@@ -12,12 +12,13 @@ import 'react-medium-image-zoom/dist/styles.css'
 type Props = {
   image: MediaCollection | number | string
   className?: string
+  imgClassName?: string;
   showLoading?: boolean
   allowFullscreen?: boolean
   sizes?: string
 }
 
-function ImageComp({ image, className = '', showLoading = true, allowFullscreen = false, sizes = "1200px" }: Props) {
+function ImageComp({ image, className = '', imgClassName = "", showLoading = true, allowFullscreen = false, sizes = "1200px" }: Props) {
   const [loading, setLoading] = useState(true)
   return (
     <div className={`relative ${className}`} style={{ aspectRatio: getMediaAspect(image) }}>
@@ -29,7 +30,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
             }}
             src={getMediaUrl(image)}
             fill
-            className="w-full h-auto z-10"
+            className={`w-full h-auto z-10 ${imgClassName}`}
             alt={getMediaAlt(image, 'Image')}
             sizes={sizes}
             unoptimized
@@ -42,7 +43,7 @@ function ImageComp({ image, className = '', showLoading = true, allowFullscreen 
           }}
           src={getMediaUrl(image)}
           fill
-          className="w-full h-auto z-10"
+          className={`w-full h-auto z-10 ${imgClassName}`}
           alt={getMediaAlt(image, 'Image')}
           sizes={sizes}
           unoptimized
