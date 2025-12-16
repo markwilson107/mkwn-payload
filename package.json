@@ -24,6 +24,7 @@
     "@payloadcms/storage-vercel-blob": "^3.43.0",
     "@payloadcms/ui": "3.43.0",
     "@tailwindcss/postcss": "^4.1.10",
+    "@vercel/analytics": "^1.6.1",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "holy-loader": "^2.3.13",

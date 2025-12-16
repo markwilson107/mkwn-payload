@@ -1,6 +1,7 @@
 import React from 'react'
 import './styles.css'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/next'
 import TopLoadingBar from '@/components/TopLoadingBar'
 
 export const metadata = {
@@ -18,6 +19,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           <TopLoadingBar />
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
