@@ -101,7 +101,7 @@ export default async function HomePage() {
               className="relative group flex max-md:flex-col items-start max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
             >
               <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
-                <ImageComp image={project.iconImage} className="w-full" allowFullscreen={false} />
+                <ImageComp image={project.iconImage} size='thumbnail' className="w-full" allowFullscreen={false} />
               </div>
               <div className="flex flex-col md:ml-5 max-md:mt-4 z-10">
                 <div className=" text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">

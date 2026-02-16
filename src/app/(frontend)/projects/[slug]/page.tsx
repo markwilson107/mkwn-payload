@@ -9,30 +9,31 @@ import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
 import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { unstable_cache } from 'next/cache'
+import ArrowBackSharp from '@/assets/ArrowBackSharp'
 
 type Props = {
   params: Promise<{ slug: string }>
 }
 
 const queryProjectsBySlug = (slug: string) =>
-	unstable_cache(
-		async () => {
-			const payload = await getPayload({ config })
+  unstable_cache(
+    async () => {
+      const payload = await getPayload({ config })
 
-			const result = await payload.find({
-				collection: 'projects',
-				limit: 1,
-				pagination: false,
-				where: { slug: { equals: slug } },
-			})
+      const result = await payload.find({
+        collection: 'projects',
+        limit: 1,
+        pagination: false,
+        where: { slug: { equals: slug } },
+      })
 
-			return result.docs?.[0] || null
-		},
-		[`project-${slug}`],
-		{
-			tags: [`project-${slug}`],
-		}
-	)()
+      return result.docs?.[0] || null
+    },
+    [`project-${slug}`],
+    {
+      tags: [`project-${slug}`],
+    },
+  )()
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params
@@ -45,6 +46,9 @@ export default async function ProjectPage({ params }: Props) {
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
         <header className="flex items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
+          <Link href="/">
+            <ArrowBackSharp className="w-7 h-7 mr-3" />
+          </Link>
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
@@ -74,7 +78,7 @@ export default async function ProjectPage({ params }: Props) {
                 className="w-[200px]"
                 allowFullscreen={false}
                 showLoading={false}
-                sizes="200px"
+                size="medium"
               />
               // <Image
               //   src={getMediaUrl(product.logo)}
@@ -121,7 +125,7 @@ export default async function ProjectPage({ params }: Props) {
               className="w-full"
               allowFullscreen={false}
               showLoading={false}
-              sizes="1200px"
+              size="large"
             />
           </div>
         </section>
@@ -166,7 +170,7 @@ export default async function ProjectPage({ params }: Props) {
                 className={`flex justify-center items-center w-full flex-col `} //md:flex-row ${i % 2 === 0 ? '' : 'md:flex-row-reverse'}
               >
                 <ImageComp
-                  sizes="1200px"
+                  size="large"
                   image={image.image}
                   className="w-full flex-1 shadow-lg md:shadow-2xl"
                   allowFullscreen={true}

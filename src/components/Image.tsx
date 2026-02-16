@@ -15,11 +15,16 @@ type Props = {
   imgClassName?: string;
   showLoading?: boolean
   allowFullscreen?: boolean
-  sizes?: string
+  size?: "thumbnail" | "medium" | "large"
 }
 
-function ImageComp({ image, className = '', imgClassName = "", showLoading = true, allowFullscreen = false, sizes = "1200px" }: Props) {
+function ImageComp({ image, className = '', imgClassName = "", showLoading = true, allowFullscreen = false, size = "thumbnail" }: Props) {
   const [loading, setLoading] = useState(true)
+  let src = "";
+  if (image && typeof image === 'object') {
+    src = `${image.sizes?.[size]?.url || image.url}`
+  }
+
   return (
     <div className={`relative ${className}`} style={{ aspectRatio: getMediaAspect(image) }}>
       {allowFullscreen ? (
@@ -28,11 +33,10 @@ function ImageComp({ image, className = '', imgClassName = "", showLoading = tru
             onLoad={() => {
               setLoading(false)
             }}
-            src={getMediaUrl(image)}
+            src={src}
             fill
             className={`w-full h-auto z-10 ${imgClassName}`}
             alt={getMediaAlt(image, 'Image')}
-            sizes={sizes}
             unoptimized
           />
         </Zoom>
@@ -41,11 +45,10 @@ function ImageComp({ image, className = '', imgClassName = "", showLoading = tru
           onLoad={() => {
             setLoading(false)
           }}
-          src={getMediaUrl(image)}
+          src={src}
           fill
           className={`w-full h-auto z-10 ${imgClassName}`}
           alt={getMediaAlt(image, 'Image')}
-          sizes={sizes}
           unoptimized
         />
       )}

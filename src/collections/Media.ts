@@ -8,7 +8,25 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
-  upload: true,
+  upload: {
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 300,
+        withoutEnlargement: false
+      },
+      {
+        name: 'medium',
+        width: 900,
+        withoutEnlargement: false
+      },
+      {
+        name: 'large',
+        width: 1920,
+        withoutEnlargement: false
+      },
+    ],
+  },
 
   fields: [
     {

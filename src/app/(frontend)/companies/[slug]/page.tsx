@@ -1,14 +1,11 @@
 import ImageComp from '@/components/Image'
 import config from '@/payload.config'
-import { getMediaAlt } from '@/utils/getMediaAlt'
-import { getMediaUrl } from '@/utils/getMediaUrl'
-import { RichText } from '@payloadcms/richtext-lexical/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
 import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { unstable_cache } from 'next/cache'
+import ArrowBackSharp from '@/assets/ArrowBackSharp'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -54,11 +51,15 @@ export default async function CompanyPage({ params }: Props) {
   return (
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
-        <header className="flex items-center w-full py-4 sm:py-6 px-4 sm:px-12 flex-shrink-0">
+        <header className="flex items-center w-full py-4 pb-1 sm:py-6 px-4 sm:px-12 flex-shrink-0">
+          <Link href="/">
+            <ArrowBackSharp className="w-7 h-7 mr-3" />
+          </Link>
           <Link href="/">
             <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
           </Link>
         </header>
+
         <section className="w-full px-4 sm:px-12 py-3">
           <h1 className="flex lg:justify-center text-4xl sm:text-5xl font-bold">
             {experience.title}
@@ -105,6 +106,7 @@ export default async function CompanyPage({ params }: Props) {
                     imgClassName="object-cover"
                     allowFullscreen={false}
                     showLoading={false}
+                    size="medium"
                   />
                   <div className="z-10 flex flex-col w-full">
                     <div className="flex flex-col gap-3 z-10 text-2xl font-bold pb-4 max-w-[400px]">
@@ -114,6 +116,7 @@ export default async function CompanyPage({ params }: Props) {
                             image={project.logo || ''}
                             className="w-full"
                             allowFullscreen={false}
+                            size="thumbnail"
                           />
                         </div>
                       ) : (
