@@ -132,7 +132,7 @@ export default async function CompanyPage({ params }: Props) {
                             className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
                           >
                             <div className="mix-blend-difference">
-                              {typeof tech.technology_item !== 'string' &&
+                              {typeof tech.technology_item === 'object' &&
                                 tech.technology_item.title}
                             </div>
                           </div>
