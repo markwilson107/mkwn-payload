@@ -10,17 +10,10 @@ import Link from 'next/link'
 import Socials from '@/components/Socials'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import ImageComp from '@/components/Image'
-
+import { queryBySiteData } from './_api/fetchSiteData'
 
 export default async function HomePage() {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const [information, projects, experience] = await Promise.all([
-    payload.findGlobal({ slug: 'information' }),
-    payload.find({ collection: 'projects' }),
-    payload.find({ collection: 'experience' }),
-  ])
+  const { information, projects, experience } = await queryBySiteData()
 
   return (
     <main className="flex flex-col w-full gap-4 lg:flex-row min-h-dvh max-w-7xl mx-auto px-6 md:px-12 lg:px-24 max-lg:overflow-x-hidden">
@@ -50,25 +43,21 @@ export default async function HomePage() {
       <div className="flex flex-col w-full lg:w-1/2 lg:py-20 leading-7">
         <section className="relative w-full">
           <div className="lg:hidden mb-7">
-            <h2 className="font-medium text-xl">
-              About
-            </h2>
+            <h2 className="font-medium text-xl">About</h2>
           </div>
           <div className="md:px-0">
             <RichText data={information?.description} />
           </div>
         </section>
-          <section className="relative w-full mt-12 lg:mt-24">
+        <section className="relative w-full mt-12 lg:mt-24">
           <div className="block mb-5 lg:hidden">
-            <h2 className="font-medium text-xl">
-              Experience
-            </h2>
+            <h2 className="font-medium text-xl">Experience</h2>
           </div>
           {experience?.docs.map((experience, i) => (
             <Link
               key={experience.id}
               className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
-              href={`/companies/${experience.slug}`}
+              href={`/experience/${experience.slug}`}
             >
               <div className="w-36 text-sm flex-shrink-0 mt-2 opacity-60">
                 {experience.timeFrame}
@@ -77,8 +66,8 @@ export default async function HomePage() {
                 <div className="text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">
                   {experience.title}
                   <ArrowOutwardIcon
-                  width={17}
-                  height={17}
+                    width={17}
+                    height={17}
                     className="inline-block ml-2 arrowIcon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
                   />
                 </div>
@@ -90,9 +79,7 @@ export default async function HomePage() {
         </section>
         <section className="relative mt-12 lg:mt-24 w-full">
           <div className="block mb-5 lg:hidden">
-            <h2 className="font-medium text-xl">
-              Projects
-            </h2>
+            <h2 className="font-medium text-xl">Projects</h2>
           </div>
           {projects?.docs.map((project, i) => (
             <Link
@@ -101,7 +88,12 @@ export default async function HomePage() {
               className="relative group flex max-md:flex-col items-start max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
             >
               <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
-                <ImageComp image={project.iconImage} size='thumbnail' className="w-full" allowFullscreen={false} />
+                <ImageComp
+                  image={project.iconImage}
+                  size="thumbnail"
+                  className="w-full"
+                  allowFullscreen={false}
+                />
               </div>
               <div className="flex flex-col md:ml-5 max-md:mt-4 z-10">
                 <div className=" text-xl items-end font-bold mb-1 max-md:mt-1 text-primary dark:text-primary-dark group-hover:text-theme transition-colors duration-300">

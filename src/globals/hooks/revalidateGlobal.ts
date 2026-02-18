@@ -9,7 +9,7 @@ export const revalidateGlobal =
       payload.logger.info(`Revalidating header`)
 
       revalidatePath('/')
-      revalidateTag(`global_${global}`)
+      revalidateTag(`home`)
     }
 
     return doc

@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Technology: CollectionConfig = {
@@ -24,4 +25,8 @@ export const Technology: CollectionConfig = {
       required: true,
     },
   ],
+    hooks: {
+      afterChange: [() => revalidateTag("site-data")],
+      afterDelete: [() => revalidateTag("site-data")],
+    },
 }

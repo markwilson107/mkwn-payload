@@ -19,7 +19,7 @@ export const revalidateCollection =
       }
 
       revalidateTag(tag)
-      revalidatePath('/')
+      revalidateTag('home')
       revalidateTag(`${basePath}-sitemap`)
     }
 

@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
 import { revalidateDelete, revalidateCollection } from './hooks/revalidateCollection'
+import { revalidateTag } from 'next/cache'
 
 export const Experience: CollectionConfig = {
   slug: 'experience',
@@ -42,7 +43,7 @@ export const Experience: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateCollection("experience")],
-    afterDelete: [revalidateDelete("experience")],
+    afterChange: [() => revalidateTag("site-data")],
+    afterDelete: [() => revalidateTag("site-data")],
   },
 }

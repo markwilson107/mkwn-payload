@@ -29,9 +29,9 @@ const queryProjectsBySlug = (slug: string) =>
 
       return result.docs?.[0] || null
     },
-    [`project-${slug}`],
+    [`site-projects`],
     {
-      tags: [`project-${slug}`],
+      tags: [`site-data`],
     },
   )()
 
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: Props) {
               priority
               fill
               className="absolute object-cover"
-              src={getMediaUrl(product.banner.bannerImage)}
+              src={getMediaUrl(product.banner.bannerImage, "large")}
               alt={getMediaAlt(product.banner.bannerImage, 'Banner Image')}
               sizes="1000px"
               unoptimized
