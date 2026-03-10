@@ -22,139 +22,56 @@ export const Projects: CollectionConfig = {
   },
   fields: [
     {
-      name: 'projectId',
-      type: 'text',
-      required: true,
-      index: true,
-    },
-    {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'subTitle',
-      type: 'text',
-    },
-    {
-      name: 'description',
-      type: 'text',
-    },
-    {
-      name: 'url',
-      type: 'text',
-    },
-    {
-      name: 'experience',
-      type: 'relationship',
-      relationTo: 'experience',
-    },
-    {
-      name: 'experienceSlug',
-      type: 'text',
-      virtual: 'experience.slug',
-    },
-    {
-      name: 'challenge',
-      type: 'richText',
-    },
-    {
-      name: 'goal',
-      type: 'richText',
-    },
-    {
-      name: 'conclusion',
-      type: 'richText',
-    },
-    {
-      name: 'reference',
-      type: 'richText',
-    },
-    // {
-    //   name: 'theme',
-    //   type: 'group',
-    //   fields: [
-    //     {
-    //       name: 'useCustomColors',
-    //       type: 'checkbox',
-    //       defaultValue: false,
-    //     },
-    //     colorPickerField({
-    //       name: 'textColor',
-    //       label: 'Text Color',
-    //     }),
-    //     colorPickerField({
-    //       name: 'backgroundColor',
-    //       label: 'Background Color',
-    //     }),
-    //   ],
-    // },
-    {
-      name: 'banner',
-      type: 'group',
-      required: true,
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'bannerImage',
-          type: 'upload',
-          relationTo: 'media',
-        },
-        colorPickerField({
-          name: 'textColor',
-          label: 'Text Color',
-        }),
-        colorPickerField({
-          name: 'backgroundColor',
-          label: 'Background Color',
-        }),
-      ],
-    },
-    {
-      name: 'iconImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
-      name: 'featuredImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
-      name: 'images',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
+          label: 'Details',
+          fields: [
+            {
+              name: 'featureImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'subTitle',
+              type: 'text',
+            },
+            {
+              name: 'description',
+              type: 'text',
+            },
+            {
+              name: 'experience',
+              type: 'relationship',
+              relationTo: 'experience',
+            },
+            {
+              name: 'experienceSlug',
+              type: 'text',
+              virtual: 'experience.slug',
+              admin: { hidden: true },
+            },
+            {
+              name: 'technology',
+              type: 'array',
+              fields: [{ type: 'text', name: 'text', required: true }],
+            },
+          ],
         },
         {
-          name: 'description',
-          type: 'text',
-        },
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'technology',
-      type: 'array',
-      fields: [
-        {
-          name: 'technology_item',
-          type: 'relationship',
-          relationTo: 'technology',
-          required: true,
+          label: 'Content',
+          fields: [
+            {
+              name: 'content',
+              type: 'richText',
+            },
+          ],
         },
       ],
     },
@@ -162,7 +79,7 @@ export const Projects: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [() => revalidateTag("site-data")],
-    afterDelete: [() => revalidateTag("site-data")],
+    afterChange: [() => revalidateTag('site-data')],
+    afterDelete: [() => revalidateTag('site-data')],
   },
 }

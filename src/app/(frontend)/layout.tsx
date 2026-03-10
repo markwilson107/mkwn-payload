@@ -14,7 +14,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-background dark:bg-background-dark" >
       <body className="bg-background dark:bg-background-dark text-primary dark:text-primary-dark w-full" suppressHydrationWarning >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" enableSystem>
           <TopLoadingBar />
           {children}
         </ThemeProvider>

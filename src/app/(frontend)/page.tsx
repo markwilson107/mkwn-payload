@@ -83,13 +83,13 @@ export default async function HomePage() {
           </div>
           {projects?.docs.map((project, i) => (
             <Link
-              href={`/projects/${project.projectId}`}
+              href={`/projects/${project.slug}`}
               key={project.id}
               className="relative group flex max-md:flex-col items-start max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
             >
               <div className="relative w-36 bg-item-background dark:bg-item-background-dark flex-shrink-0 rounded-md overflow-hidden border border-item-border dark:border-item-border-dark">
                 <ImageComp
-                  image={project.iconImage}
+                  image={project.featureImage}
                   size="thumbnail"
                   className="w-full"
                   allowFullscreen={false}
@@ -112,7 +112,7 @@ export default async function HomePage() {
                       key={`${tech.id}`}
                       className="relative px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full mr-2 mb-2 z-30"
                     >
-                      {typeof tech.technology_item === 'object' && tech.technology_item.title}
+                      {tech.text}
                     </div>
                   ))}
                 </div>

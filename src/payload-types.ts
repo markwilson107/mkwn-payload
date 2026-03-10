@@ -71,7 +71,6 @@ export interface Config {
     media: MediaCollection;
     experience: ExperienceCollection;
     projects: ProjectCollection;
-    technology: TechnologyCollection;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -82,7 +81,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     experience: ExperienceSelect<false> | ExperienceSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    technology: TechnologySelect<false> | TechnologySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -210,108 +208,35 @@ export interface ExperienceCollection {
 export interface ProjectCollection {
   id: number;
   _order?: string | null;
-  projectId: string;
-  logo?: (number | null) | MediaCollection;
+  featureImage: number | MediaCollection;
   title: string;
   subTitle?: string | null;
   description?: string | null;
-  url?: string | null;
   experience?: (number | null) | ExperienceCollection;
   experienceSlug?: string | null;
-  challenge?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  goal?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  conclusion?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  reference?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  banner: {
-    bannerImage?: (number | null) | MediaCollection;
-    textColor?: string | null;
-    backgroundColor?: string | null;
-  };
-  iconImage: number | MediaCollection;
-  featuredImage: number | MediaCollection;
-  images?:
-    | {
-        title?: string | null;
-        description?: string | null;
-        image: number | MediaCollection;
-        id?: string | null;
-      }[]
-    | null;
   technology?:
     | {
-        technology_item: number | TechnologyCollection;
+        text: string;
         id?: string | null;
       }[]
     | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   slug?: string | null;
   slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "technology".
- */
-export interface TechnologyCollection {
-  id: number;
-  title: string;
-  logo: number | MediaCollection;
   updatedAt: string;
   createdAt: string;
 }
@@ -337,10 +262,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | ProjectCollection;
-      } | null)
-    | ({
-        relationTo: 'technology';
-        value: number | TechnologyCollection;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -474,53 +395,21 @@ export interface ExperienceSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   _order?: T;
-  projectId?: T;
-  logo?: T;
+  featureImage?: T;
   title?: T;
   subTitle?: T;
   description?: T;
-  url?: T;
   experience?: T;
   experienceSlug?: T;
-  challenge?: T;
-  goal?: T;
-  conclusion?: T;
-  reference?: T;
-  banner?:
-    | T
-    | {
-        bannerImage?: T;
-        textColor?: T;
-        backgroundColor?: T;
-      };
-  iconImage?: T;
-  featuredImage?: T;
-  images?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-        id?: T;
-      };
   technology?:
     | T
     | {
-        technology_item?: T;
+        text?: T;
         id?: T;
       };
+  content?: T;
   slug?: T;
   slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "technology_select".
- */
-export interface TechnologySelect<T extends boolean = true> {
-  title?: T;
-  logo?: T;
   updatedAt?: T;
   createdAt?: T;
 }

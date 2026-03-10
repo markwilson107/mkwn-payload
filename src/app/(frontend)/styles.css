@@ -56,3 +56,71 @@ footer a:hover {
 [data-rmiz-modal-overlay='visible'] {
   background-color: rgb(0, 0, 0) !important;
 }
+
+/* Mirroring Tailwind's structural typography without forcing colors */
+
+.rich-text-content {
+  @apply leading-7 antialiased;
+  word-wrap: break-word;
+}
+
+/* Headings - Using Tailwind's Scale and Spacing */
+.rich-text-content h1 {
+  @apply text-3xl font-bold tracking-tight md:text-5xl mb-2;
+}
+
+.rich-text-content h2 {
+  @apply text-2xl font-bold tracking-tight md:text-3xl mb-2;
+}
+
+.rich-text-content h3 {
+  @apply text-xl font-bold md:text-2xl mb-2;
+}
+
+/* Paragraphs & Links */
+
+
+.rich-text-content a {
+  @apply font-medium underline underline-offset-4 decoration-current/30 hover:decoration-current;
+}
+
+/* Lists - Structural Layout */
+.rich-text-content ul {
+  @apply list-disc list-outside ml-6 space-y-1;
+}
+
+.rich-text-content ol {
+  @apply list-decimal list-outside ml-6 space-y-1;
+}
+
+.rich-text-content li {
+  @apply pl-1;
+}
+
+/* Blockquotes */
+.rich-text-content blockquote {
+  @apply border-l-4 border-current/20 pl-4 italic;
+}
+
+/* Images & Media */
+.rich-text-content img {
+  @apply my-4 md:my-6 max-w-full h-auto block;
+}
+
+/* Tables (Responsive Structural Layout) */
+.rich-text-content table {
+  @apply w-full text-left text-sm border-collapse my-8 overflow-x-auto block md:table;
+}
+
+.rich-text-content th {
+  @apply font-semibold p-3 border border-current/10;
+}
+
+.rich-text-content td {
+  @apply p-3 border border-current/10;
+}
+
+/* Inline Code - Structural Only */
+.rich-text-content code {
+  @apply px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-current/10;
+}

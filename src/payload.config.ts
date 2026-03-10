@@ -29,7 +29,7 @@ export default buildConfig({
     },
   },
   globals: [Information],
-  collections: [Users, Media, Experience, Projects, Technology],
+  collections: [Users, Media, Experience, Projects],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

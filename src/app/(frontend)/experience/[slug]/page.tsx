@@ -6,6 +6,8 @@ import { getPayload } from 'payload'
 import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { unstable_cache } from 'next/cache'
 import ArrowBackSharp from '@/assets/ArrowBackSharp'
+import BackButton from '@/components/BackArrow'
+import ThemeSwitch from '@/components/ThemeSwitch'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -52,12 +54,9 @@ export default async function CompanyPage({ params }: Props) {
     <main className="flex flex-col w-full h-full overflow-x-hidden">
       <div className="flex flex-col w-full min-h-dvh max-w-7xl mx-auto">
         <header className="flex items-center w-full py-4 pb-1 sm:py-6 px-4 sm:px-12 flex-shrink-0">
-          <Link href="/">
-            <ArrowBackSharp className="w-7 h-7 mr-3" />
-          </Link>
-          <Link href="/">
-            <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
-          </Link>
+          <BackButton />
+          <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
+          <ThemeSwitch className='ml-auto' />
         </header>
 
         <section className="w-full px-4 sm:px-12 py-3">
@@ -89,62 +88,23 @@ export default async function CompanyPage({ params }: Props) {
           <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12">
             {projects?.map((project) => (
               <Link
-                href={`/projects/${project.projectId}`}
+                href={`/projects/${project.slug}`}
                 key={`project-${project.id}`}
-                className="flex flex-row w-full lg:w-[50rem] cursor-pointer select-none group"
+                className="flex flex-row w-full lg:w-[35rem] cursor-pointer select-none group"
               >
                 <div
-                  className="relative rounded-xl overflow-hidden w-full flex p-4 sm:p-6 lg:p-8 sm:aspect-16/9"
-                  style={{
-                    background: project.banner?.backgroundColor || 'unset',
-                    color: project.banner?.textColor || 'unset',
-                  }}
+                  className="relative rounded-xl overflow-hidden w-full flex p-4 sm:p-6 lg:p-8"
+                  style={{ aspectRatio: 768 / 512 }}
                 >
                   <ImageComp
-                    image={project.banner?.bannerImage || ''}
+                    image={project.featureImage}
                     className="!absolute left-0 top-0 w-full h-full overflow-hidden"
                     imgClassName="object-cover"
                     allowFullscreen={false}
                     showLoading={false}
                     size="medium"
                   />
-                  <div className="z-10 flex flex-col w-full">
-                    <div className="flex flex-col gap-3 z-10 text-2xl font-bold pb-4 max-w-[400px]">
-                      {project.logo ? (
-                        <div className="relative w-30 sm:w-44 flex-shrink-0 rounded-md overflow-hidden">
-                          <ImageComp
-                            image={project.logo || ''}
-                            className="w-full"
-                            allowFullscreen={false}
-                            size="thumbnail"
-                          />
-                        </div>
-                      ) : (
-                        <div>{project.title}</div>
-                      )}
-                      <div className="font-semibold text-sm sm:text-base opacity-90">
-                        {project.description}
-                      </div>
-                      <div className="flex flex-row flex-wrap gap-2 mt-2 sm:mt-4">
-                        {project.technology?.map((tech, i) => (
-                          <div
-                            key={`tech-bubble-${tech.id}`}
-                            className="px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full "
-                          >
-                            <div className="mix-blend-difference">
-                              {typeof tech.technology_item === 'object' &&
-                                tech.technology_item.title}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex mt-2 sm:mt-auto ">
-                      <ArrowOutwardIcon className="ml-auto w-8 sm:w-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </div>
-                  </div>
                 </div>
-                {/* <img className='w-full' src={getMediaUrl(project.banner?.bannerImage || '')} /> */}
               </Link>
             ))}
           </div>
