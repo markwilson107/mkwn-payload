@@ -37,7 +37,7 @@ const queryCompanyBySlug = (slug: string) =>
         projects: projects.docs,
       }
     },
-    [`site-experience`],
+    [`site-experience-${slug}`],
     {
       tags: ['site-data'],
     },

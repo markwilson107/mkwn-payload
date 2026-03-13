@@ -28,7 +28,7 @@ const queryProjectsBySlug = (slug: string) =>
 
       return result.docs?.[0] || null
     },
-    [`site-projects`],
+    [`site-projects-${slug}`],
     {
       tags: [`site-data`],
     },
