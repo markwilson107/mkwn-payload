@@ -93,7 +93,7 @@ export default async function CompanyPage({ params }: Props) {
           <ThemeSwitch className='ml-auto' />
         </header>
 
-        <section className="w-full px-4 sm:px-12 py-3">
+        <section className="w-full px-4 sm:px-12 py-3 mt-2">
           <h1 className="flex lg:justify-center text-4xl sm:text-5xl font-bold">
             {experience.title}
           </h1>
@@ -119,7 +119,7 @@ export default async function CompanyPage({ params }: Props) {
               {experience.description}
             </p>
           </div>
-          <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12 flex-wrap gap-3">
+          <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12 flex-wrap gap-4">
             {projects?.map((project) => (
               <Link
                 href={`/projects/${project.slug}`}
