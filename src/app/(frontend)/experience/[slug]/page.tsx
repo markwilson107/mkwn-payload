@@ -85,7 +85,7 @@ export default async function CompanyPage({ params }: Props) {
               {experience.description}
             </p>
           </div>
-          <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12">
+          <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12 flex-wrap gap-3">
             {projects?.map((project) => (
               <Link
                 href={`/projects/${project.slug}`}
