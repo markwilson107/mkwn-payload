@@ -16,10 +16,8 @@
   },
   "dependencies": {
     "@innovixx/payload-color-picker-field": "^2.0.2",
-    "@payloadcms/db-mongodb": "3.43.0",
-    "@payloadcms/db-postgres": "^3.43.0",
+    "@payloadcms/db-vercel-postgres": "^3.43.0",
     "@payloadcms/next": "3.43.0",
-    "@payloadcms/payload-cloud": "3.43.0",
     "@payloadcms/richtext-lexical": "3.43.0",
     "@payloadcms/storage-vercel-blob": "^3.43.0",
     "@payloadcms/ui": "3.43.0",

@@ -1,10 +1,9 @@
 import config from '@/payload.config'
-import { JSXConverter, RichText, defaultJSXConverters } from '@payloadcms/richtext-lexical/react'
+import { RichText, defaultJSXConverters } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
 import { unstable_cache } from 'next/cache'
-import ArrowBackSharp from '@/assets/ArrowBackSharp'
 import type { SerializedUploadNode } from '@payloadcms/richtext-lexical'
 import FullscreenWrapper from '@/fields/RichTextImageWrapper'
 import BackButton from '@/components/BackArrow'
@@ -12,6 +11,21 @@ import ThemeSwitch from '@/components/ThemeSwitch'
 
 type Props = {
   params: Promise<{ slug: string }>
+}
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config })
+
+  const projects = await payload.find({
+    collection: 'projects',
+    depth: 0,
+    pagination: false,
+    select: {
+      slug: true,
+    },
+  })
+
+  return projects.docs.map(({ slug }) => ({ slug }))
 }
 
 const queryProjectsBySlug = (slug: string) =>
@@ -23,7 +37,11 @@ const queryProjectsBySlug = (slug: string) =>
         collection: 'projects',
         limit: 1,
         pagination: false,
+        depth: 2,
         where: { slug: { equals: slug } },
+        select: {
+          content: true,
+        },
       })
 
       return result.docs?.[0] || null

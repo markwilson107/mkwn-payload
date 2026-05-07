@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
-import { revalidateDelete, revalidateCollection } from './hooks/revalidateCollection'
 import { revalidateTag } from 'next/cache'
 
 export const Experience: CollectionConfig = {

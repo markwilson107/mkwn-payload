@@ -1,21 +1,57 @@
 import { MetadataRoute } from 'next'
-import { queryBySiteData } from './_api/fetchSiteData'
-import { headers } from 'next/headers'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+
+const getSiteUrl = () => {
+  const url =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    process.env.VERCEL_URL ||
+    'http://localhost:3000'
+
+  return url.startsWith('http') ? url : `https://${url}`
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const headerList = await headers()
-  const host = headerList.get('host') || ''
-  
-  const { projects, experience } = await queryBySiteData()
+  const payload = await getPayload({ config })
+  const siteUrl = getSiteUrl()
+
+  const [projects, experience] = await Promise.all([
+    payload.find({
+      collection: 'projects',
+      depth: 0,
+      pagination: false,
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+    }),
+    payload.find({
+      collection: 'experience',
+      depth: 0,
+      pagination: false,
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+    }),
+  ])
 
   const projectsMap = projects.docs.map((project) => ({
-    url: `https://${host}/projects/${project.slug}`,
+    url: `${siteUrl}/projects/${project.slug}`,
     lastModified: new Date(project.updatedAt),
   }))
   const experienceMap = experience.docs.map((experience) => ({
-    url: `https://${host}/projects/${experience.slug}`,
+    url: `${siteUrl}/experience/${experience.slug}`,
     lastModified: new Date(experience.updatedAt),
   }))
 
-  return [...projectsMap, ...experienceMap]
+  return [
+    {
+      url: siteUrl,
+      lastModified: new Date(),
+    },
+    ...projectsMap,
+    ...experienceMap,
+  ]
 }

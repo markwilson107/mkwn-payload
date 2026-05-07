@@ -1,8 +1,5 @@
 // storage-adapter-import-placeholder
-// import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -12,7 +9,6 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Projects } from './collections/Projects'
-import { Technology } from './collections/Technology'
 import { Experience } from './collections/Experience'
 import { Information } from './globals/Information'
 
@@ -35,14 +31,13 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: postgresAdapter({
+  db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URL || process.env.DATABASE_URI || '',
     },
   }),
   sharp,
   plugins: [
-    payloadCloudPlugin(),
     vercelBlobStorage({
       enabled: true,
       collections: {

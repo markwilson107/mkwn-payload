@@ -3,9 +3,7 @@ import config from '@/payload.config'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
-import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
 import { unstable_cache } from 'next/cache'
-import ArrowBackSharp from '@/assets/ArrowBackSharp'
 import BackButton from '@/components/BackArrow'
 import ThemeSwitch from '@/components/ThemeSwitch'
 
@@ -13,27 +11,63 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+export async function generateStaticParams() {
+  const payload = await getPayload({ config })
+
+  const experience = await payload.find({
+    collection: 'experience',
+    depth: 0,
+    pagination: false,
+    select: {
+      slug: true,
+    },
+  })
+
+  return experience.docs.map(({ slug }) => ({ slug }))
+}
+
 const queryCompanyBySlug = (slug: string) =>
   unstable_cache(
     async () => {
       const payload = await getPayload({ config })
 
-      const [experience, projects] = await Promise.all([
-        payload.find({
-          collection: 'experience',
-          limit: 1,
-          pagination: false,
-          where: { slug: { equals: slug } },
-        }),
-        payload.find({
-          collection: 'projects',
-          pagination: false,
-          where: { experienceSlug: { equals: slug } },
-        }),
-      ])
+      const experience = await payload.find({
+        collection: 'experience',
+        limit: 1,
+        pagination: false,
+        depth: 0,
+        where: { slug: { equals: slug } },
+        select: {
+          title: true,
+          role: true,
+          description: true,
+          timeFrame: true,
+          url: true,
+        },
+      })
+
+      const experienceDoc = experience.docs?.[0]
+
+      if (!experienceDoc) {
+        return {
+          experience: null,
+          projects: [],
+        }
+      }
+
+      const projects = await payload.find({
+        collection: 'projects',
+        pagination: false,
+        depth: 1,
+        where: { experience: { equals: experienceDoc.id } },
+        select: {
+          slug: true,
+          featureImage: true,
+        },
+      })
 
       return {
-        experience: experience.docs?.[0] || null,
+        experience: experienceDoc,
         projects: projects.docs,
       }
     },

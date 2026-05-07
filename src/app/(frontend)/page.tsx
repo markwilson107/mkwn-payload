@@ -1,7 +1,5 @@
-import { getPayload } from 'payload'
 import React from 'react'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import config from '@/payload.config'
 import './styles.css'
 import HeaderEffect from '@/components/HeaderEffect'
 import ArrowOutwardIcon from '@/assets/ArrowOutwardIcon'
@@ -53,7 +51,7 @@ export default async function HomePage() {
           <div className="block mb-5 lg:hidden">
             <h2 className="font-medium text-xl">Experience</h2>
           </div>
-          {experience?.docs.map((experience, i) => (
+          {experience?.docs.map((experience) => (
             <Link
               key={experience.id}
               className="relative group flex max-md:flex-col max-lg:py-4 lg:p-4 mb-4 cursor-pointer border border-transparent rounded-lg lg:hover:bg-item-background lg:hover:border-item-border lg:dark:hover:bg-item-background-dark lg:dark:hover:border-item-border-dark"
@@ -81,7 +79,7 @@ export default async function HomePage() {
           <div className="block mb-5 lg:hidden">
             <h2 className="font-medium text-xl">Projects</h2>
           </div>
-          {projects?.docs.map((project, i) => (
+          {projects?.docs.map((project) => (
             <Link
               href={`/projects/${project.slug}`}
               key={project.id}
@@ -107,7 +105,7 @@ export default async function HomePage() {
                 </div>
                 <div className="text-sm font-light my-1.5  leading-6">{project.description}</div>
                 <div className="flex flex-wrap mt-2 z-20">
-                  {project.technology?.map((tech, i) => (
+                  {project.technology?.map((tech) => (
                     <div
                       key={`${tech.id}`}
                       className="relative px-3 py-1 bg-theme/20 text-theme text-xs font-medium rounded-full mr-2 mb-2 z-30"
