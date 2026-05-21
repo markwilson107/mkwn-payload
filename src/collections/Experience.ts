@@ -12,37 +12,57 @@ export const Experience: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'], useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'updatedAt'],
+    useAsTitle: 'title',
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'role',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'description',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'timeFrame',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'url',
-      type: 'text',
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Details',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'role',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'description',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'timeFrame',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'url',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          label: 'Content',
+          fields: [
+            {
+              name: 'content',
+              type: 'richText',
+            },
+          ],
+        },
+      ],
     },
     ...slugField(),
   ],
   hooks: {
-    afterChange: [() => revalidateTag("site-data")],
-    afterDelete: [() => revalidateTag("site-data")],
+    afterChange: [() => revalidateTag('site-data')],
+    afterDelete: [() => revalidateTag('site-data')],
   },
 }

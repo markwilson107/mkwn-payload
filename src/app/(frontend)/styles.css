@@ -66,15 +66,15 @@ footer a:hover {
 
 /* Headings - Using Tailwind's Scale and Spacing */
 .rich-text-content h1 {
-  @apply text-3xl font-bold tracking-tight md:text-5xl mb-2;
+  @apply text-3xl font-bold tracking-tight md:text-5xl mb-2 md:mb-4;
 }
 
 .rich-text-content h2 {
-  @apply text-2xl font-bold tracking-tight md:text-3xl mb-2;
+  @apply text-2xl font-bold tracking-tight md:text-3xl mb-2 md:mb-4;
 }
 
 .rich-text-content h3 {
-  @apply text-xl font-bold md:text-2xl mb-2;
+  @apply text-xl font-bold md:text-2xl mb-2 md:mb-4;
 }
 
 /* Paragraphs & Links */

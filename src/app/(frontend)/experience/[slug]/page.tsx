@@ -6,6 +6,9 @@ import { getPayload } from 'payload'
 import { unstable_cache } from 'next/cache'
 import BackButton from '@/components/BackArrow'
 import ThemeSwitch from '@/components/ThemeSwitch'
+import { defaultJSXConverters, RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedUploadNode } from '@payloadcms/richtext-lexical'
+import FullscreenWrapper from '@/fields/RichTextImageWrapper'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -42,6 +45,7 @@ const queryCompanyBySlug = (slug: string) =>
           role: true,
           description: true,
           timeFrame: true,
+          content: true,
           url: true,
         },
       })
@@ -90,7 +94,7 @@ export default async function CompanyPage({ params }: Props) {
         <header className="flex items-center w-full py-4 pb-1 sm:py-6 px-4 sm:px-12 flex-shrink-0">
           <BackButton />
           <h1 className="text-xl sm:text-2xl font-bold">mkwn.dev</h1>
-          <ThemeSwitch className='ml-auto' />
+          <ThemeSwitch className="ml-auto" />
         </header>
 
         <section className="w-full px-4 sm:px-12 py-3 mt-2">
@@ -119,6 +123,24 @@ export default async function CompanyPage({ params }: Props) {
               {experience.description}
             </p>
           </div>
+          {experience.content && (
+            <section className="w-full mt-6 sm:mt-12 rich-text-content">
+              <RichText
+                data={experience.content}
+                converters={{
+                  ...defaultJSXConverters,
+                  upload: (props: { node: SerializedUploadNode }) => {
+                    const originalConverter = defaultJSXConverters.upload as any
+                    const DefaultImage =
+                      typeof originalConverter === 'function'
+                        ? originalConverter(props)
+                        : originalConverter
+                    return <FullscreenWrapper node={props.node}>{DefaultImage}</FullscreenWrapper>
+                  },
+                }}
+              />
+            </section>
+          )}
           <div className="flex flex-row items-center justify-center w-full mt-6 sm:mt-12 flex-wrap gap-4">
             {projects?.map((project) => (
               <Link

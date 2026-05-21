@@ -196,6 +196,21 @@ export interface ExperienceCollection {
   description: string;
   timeFrame: string;
   url?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -384,6 +399,7 @@ export interface ExperienceSelect<T extends boolean = true> {
   description?: T;
   timeFrame?: T;
   url?: T;
+  content?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
