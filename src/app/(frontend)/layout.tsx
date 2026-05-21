@@ -2,6 +2,7 @@ import React from 'react'
 import './styles.css'
 import { ThemeProvider } from 'next-themes'
 import TopLoadingBar from '@/components/TopLoadingBar'
+import 'react-medium-image-zoom/dist/styles.css'
 
 export const metadata = {
   description: "Hi, I'm Mark I build rock-solid web and software applications.",

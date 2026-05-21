@@ -3,10 +3,10 @@
 import { MediaCollection } from '@/payload-types'
 import { getMediaAlt } from '@/utils/getMediaAlt'
 import { getMediaAspect } from '@/utils/getMediaAspect'
-import { getMediaUrl } from '@/utils/getMediaUrl'
 import Image from 'next/image'
 import { useState } from 'react'
 import Zoom from 'react-medium-image-zoom'
+
 
 type Props = {
   image: MediaCollection | number | string
