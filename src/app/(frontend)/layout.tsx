@@ -1,6 +1,7 @@
 import React from 'react'
 import './styles.css'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/next'
 import TopLoadingBar from '@/components/TopLoadingBar'
 import 'react-medium-image-zoom/dist/styles.css'
 
@@ -19,6 +20,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           <TopLoadingBar />
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
